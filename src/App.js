@@ -16,7 +16,8 @@ import Critics from "./pages/Critics";
 import Genres from "./pages/Genres";
 import Login from "./pages/Login";
 
-
+import Navbar from "./components/Navbar";
+import Sidebar from "./components/Sidebar";
 
 const ALL_MOVIES = gql`
   query {
@@ -47,9 +48,7 @@ const App = () => {
     return <div>loading...</div>
   }
 
-  return (
-    <Router>
-
+  /*
       <div>
         <Link style={padding} to="/">Etusivu</Link>
         <Link style={padding} to="/elokuvat">Elokuvat</Link>
@@ -61,19 +60,30 @@ const App = () => {
           : <Link style={padding} to="/login">Kirjaudu</Link>
         }
       </div>
+  */
+  return (
+    <Router>
 
-      <Routes>
-        <Route path="/genret" element={<Genres />} />
-        <Route path="/kriitikot" element={<Critics />} />
-        <Route path="/elokuvat/:id" element={<Movie movies={result.data.allMovies}/>} />
-        <Route path="/elokuvat" element={<Movies movies={result.data.allMovies}/>} />
-        <Route path="/login" element={<Login onLogin={login} />} />
-        <Route path="/" element={<FrontPage />} />
-      </Routes>
+      <section>
+    
+        <Navbar user={user} />
 
-      <div>
-        <i>Raimo Haikari 2022</i>
-      </div>
+        <Sidebar />
+
+        <Routes>
+          <Route path="/genret" element={<Genres />} />
+          <Route path="/kriitikot" element={<Critics />} />
+          <Route path="/elokuvat/:id" element={<Movie movies={result.data.allMovies}/>} />
+          <Route path="/elokuvat" element={<Movies movies={result.data.allMovies}/>} />
+          <Route path="/login" element={<Login onLogin={login} />} />
+          <Route path="/" element={<FrontPage />} />
+        </Routes>
+
+        <div>
+          <i>Raimo Haikari 2022</i>
+        </div>
+
+      </section>
 
     </Router>
   );
