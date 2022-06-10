@@ -1,23 +1,36 @@
-import { Link } from "react-router-dom";
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-const MovieList = ({ movies }) => {
+import GeneralTabs from './Tabs/generalTabs';
+
+import { initializeMovies } from "../../reducers/movieListReducer";
+
+/*
+https://medium.com/react-weekly/implementing-graphql-in-your-redux-app-dad7acf39e1b
+*/
+const MovieList = () => {
+
+    const dispatch = useDispatch();
+
+    const { moviesLoading, visibleData} = useSelector(state => state.movieList);
+
+    useEffect(() => {
+
+        if(visibleData === null)
+            dispatch(initializeMovies())
+    }, [visibleData])
+
 
     return (
-        <div>
-            <h3>Elokuvat</h3>
-            <ul>
-                {
-                    movies.map(movie => {
-                        return (
-                            <li key={movie.googleID}>
-                                <Link to={`/elokuvat/${movie.googleID}`}>{movie.nimi}</Link>
-                            </li>
-                        )
-                    })
-                }
-            </ul>
-        </div>
+        <>
+            {
+                moviesLoading === true
+                ? <div>L.A.D.A.T.A.A.N</div>
+                : <GeneralTabs store='movieList' />
+            }
+        </>
     );
 };
+
 
 export default MovieList;

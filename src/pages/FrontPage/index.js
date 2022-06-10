@@ -1,8 +1,9 @@
 import FrontpageContent from "../../components/FrontpageContent";
+import HeroSection from "../../components/HeroSection";
 
 const FrontPage = () => {
     return (
-        <FrontpageContent />
+        <HeroSection />
     );
 };
 

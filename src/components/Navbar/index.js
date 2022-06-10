@@ -15,7 +15,7 @@ import {
 /*
 
 */
-const Navbar = ({ user }) => {
+const Navbar = ({ toggle,user }) => {
 
     return (
         <>
@@ -26,7 +26,9 @@ const Navbar = ({ user }) => {
                         Tähtisadetta
                     </NavLogo>
 
-                    <MobileIcon>
+                    <MobileIcon
+                        onClick={toggle}
+                    >
                         <FaBars />
                     </MobileIcon>
 
@@ -34,7 +36,11 @@ const Navbar = ({ user }) => {
 
                         <NavItem>
                             <NavLinks to="/elokuvat">Elokuvat</NavLinks>
+                        </NavItem>
+                        <NavItem>
                             <NavLinks to="/kriitikot">Kriitikot</NavLinks>
+                        </NavItem>
+                        <NavItem>
                             <NavLinks to="/genret">Genret</NavLinks>
                         </NavItem>
 
