@@ -1,7 +1,7 @@
 /* eslint-disable default-case */
 import { createSlice } from '@reduxjs/toolkit';
 
-import { setDisplayType } from './movieListReducer'
+import { setDisplayType, setSortingSettings } from './movieListReducer'
 
 const initialState = {};
 
@@ -45,6 +45,21 @@ export const updateDisplayType = (val) => {
                 });
 
                 break;
+        }
+    }
+}
+
+export const updateSortingSetting = (val) => {
+
+    return dispatch => {
+
+        switch(val.store){
+            
+
+            case 'movieList': 
+                dispatch(setSortingSettings({field: val.field}));
+                break;
+
         }
     }
 }

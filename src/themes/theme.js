@@ -14,12 +14,15 @@ const BasicTheme = {
     colors: {
         backgroundColor: '#411a35',
         bgHover: '#000',
-        bgLight: '#fcede8', // Leipätekstin tausta,
+        bgLight: '#fcede8',     // Leipätekstin tausta,
+        bgWhite: '#fff',        // Elokuvakuvakkeiden tausta
         bgSecondary: '#c7b3c2', // Passiivinen välilehtiotsikko, taulukon "joka toinen rivi"
         txtDefault: 'navy'
     },
     text: {
-        fontSize: '1em'
+        fontSize: '1em',
+        txtDefault: 'navy',     // Elokuvakuvakkeiden tekstit, Taulukkolistauksen normaali otsikko
+        txtActive: 'red',       // Taulukkolistauksen aktivoitu otsikko
     }
 }
 

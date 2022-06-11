@@ -210,11 +210,15 @@ const getPresentedMovieList = (allTheMovies, currentPage, itemsPerPage, search ,
     /*
      * Lajittelu
      */
+
+    
     if(sortingField) {
 
         const reversed = sortingOrder === "asc" ? 1 : -1;
 
-        computedMovies = computedMovies.sort((a,b) => {
+        let shallowCopy = computedMovies.slice();
+
+        shallowCopy.sort((a,b) => {
 
             let val;
 
@@ -229,7 +233,10 @@ const getPresentedMovieList = (allTheMovies, currentPage, itemsPerPage, search ,
             return(val)
         })
 
+        computedMovies = shallowCopy
+    
     }
+    
 
     return computedMovies;
 }
@@ -383,7 +390,46 @@ const getPaginationLinks = (currentPage, maxNumberOfPaginationLinks, totalPages)
     return indices;
 }
 
+/*
+ * Lajittelujärjestyksen muutos
+ */
+const updateSortingSetting = (state, field) => {
 
+    let newField = field;
+    let newOrder = ((newField === state.sortingField) && (state.sortingOrder === "asc")) ? "desc" : "asc";
+
+
+
+    let moviesToShow = getPresentedMovieList(
+        state.allTheMovies, 
+        state.currentPage, 
+        state.itemsPerPage,
+        state.search, 
+        newField, 
+        newOrder,
+        state.genreNames
+    );
+
+
+    // - päivitetään kävijälle näytettävä elokuvalistaus
+    let newCurrentPage = 1
+
+    //Suodatetaan sivulla näytettävät elokuvat, kun sivutus otetaan huomioon
+    moviesToShow = getVisibleMovies(moviesToShow, newCurrentPage, state.itemsPerPage);
+
+    let paginationLinks = getPaginationLinks(newCurrentPage, state.maxNumberOfPaginationLinks, state.totalPages);
+
+    return {
+        ...state,
+        sortingField: newField,
+        sortingOrder: newOrder,
+        currentPage: newCurrentPage,
+        paginationLinks: paginationLinks,
+        visibleData: moviesToShow 
+    }
+
+
+}
 
 
 
@@ -428,11 +474,18 @@ const movielistSlice = createSlice({
                 ...state,
                 displayTypes: updatedTypes
             }
+        },
+        setSortingSettings(state, action) {
+
+            const { field } = action.payload;
+            const updatedState = updateSortingSetting(state, field);
+            console.log('VALMIS')
+            return updatedState
         }
     }
 })
 
-export const { fetchingMovies, setDisplayType } = movielistSlice.actions;
+export const { fetchingMovies, setDisplayType, setSortingSettings } = movielistSlice.actions;
 
 
 export const initializeMovies = () => {
