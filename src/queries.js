@@ -4,7 +4,15 @@ export const ALL_MOVIES = `
       googleID
       nimi
       wiki
+      kavi
       img
+      ensiIlta
+      reviews {
+        stars
+      }
+      genres {
+        genre
+      }
     }
   }
 `;

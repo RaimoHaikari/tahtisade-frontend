@@ -83,17 +83,34 @@ const initialState = {
  */
 const displayMovieList = (state, data) => {
 
+    console.log(data)
+
     let loadedMovieList = data.map(d => {
 
         let productPage = `/elokuvat/:{d.id}`;
-        let genres = d.genre.map(g => g.genreId);
+        let genres = d.genres.map(g => g.genre);
 
+        console.log(d.img)
+
+        /*
+
+            numberOfReviews: d.stars.length,
+        */
         return {
             ...d,
             productPage: productPage,
             genre: genres,
-            numberOfReviews: d.stars.length,
-            averageOfReviews: (d.stars.length===0?0:round(average(d.stars),2))
+            numberOfReviews: d.reviews.length,
+            averageOfReviews: (
+                d.reviews.length===0
+                ?0
+                :round(
+                    average(
+                        d.reviews.map(r => r.stars)
+                    )
+                    ,2
+                )
+            )
         }
 
     })
@@ -504,7 +521,7 @@ export const initializeMovies = () => {
         dispatch(
             fetchingMovies({
                 loading: false,
-                data: MovieListData
+                data: movies.data.allMovies
             })
         )
     
