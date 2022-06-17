@@ -11,8 +11,6 @@ import movieService from '../services/movies';
 import { average, round } from '../misc/helperFunctions';
 
 
-import { MovieListData } from '../misc/mockData';
-
 import {
     SiFirst,
     SiLastpass
@@ -58,7 +56,7 @@ const initialState = {
     displayTypes: DISPLAYTYPE,  // Aineiston esittämisen vaihtoehtoiset tavat
     genreNames: null,
     headers: [],               // Huom! Pitää olla jotta tieto voidaan esittää taulukossa
-    itemsPerPage: 25,           // Kuinka monen elokuvan tiedot sivulla näytetään kerrallaan
+    itemsPerPage: 4 ,           // Kuinka monen elokuvan tiedot sivulla näytetään kerrallaan
     maxNumberOfPaginationLinks: 5,
     message: 'Aloitustervehdys',
     moviesLoading: true,    // Ollaanko hakemassa aineistoa palvelimelta
@@ -89,8 +87,6 @@ const displayMovieList = (state, data) => {
 
         let productPage = `/elokuvat/:{d.id}`;
         let genres = d.genres.map(g => g.genre);
-
-        console.log(d.img)
 
         /*
 
@@ -408,6 +404,47 @@ const getPaginationLinks = (currentPage, maxNumberOfPaginationLinks, totalPages)
 }
 
 /*
+ * Asetetaan aktiivisen sivun sisältö.
+ */
+const updateCurretPage = (state, page) => {
+
+    let newCurrentPage = page;
+
+    // - päivitetään kävijälle näytettävä elokuvalistaus
+    let moviesToShow = getPresentedMovieList(
+        state.allTheMovies, 
+        newCurrentPage, 
+        state.itemsPerPage,
+        state.search, 
+        state.sortingField, 
+        state.sortingOrder,
+        state.genreNames
+    );
+    
+    /*
+     * Sivutukseen tarvittava tieto
+     */
+    let itemsTotal = moviesToShow.length;
+    let pagesTotal = getNumberOfPagesTotal(state, itemsTotal);
+
+    /*
+     * Suodatetaan sivulla näytettävät elokuvat, kun sivutus otetaan huomioon
+     */
+    moviesToShow = getVisibleMovies(moviesToShow, newCurrentPage, state.itemsPerPage);
+
+    let paginationLinks = getPaginationLinks(newCurrentPage, state.maxNumberOfPaginationLinks, pagesTotal);
+
+    return {
+        ...state,
+        totalItems: itemsTotal,
+        totalPages: pagesTotal,
+        visibleData: moviesToShow,
+        paginationLinks: paginationLinks,
+        currentPage: newCurrentPage
+    };
+}
+
+/*
  * Lajittelujärjestyksen muutos
  */
 const updateSortingSetting = (state, field) => {
@@ -466,6 +503,10 @@ const movielistSlice = createSlice({
 
             return displayMovieList(state, data);
         },
+        setCurretPage(state, action){
+            const { page } = action.payload;
+            return updateCurretPage(state, page);
+        },
         /*
          * Asetetaan listaustyyppi
          *
@@ -496,13 +537,12 @@ const movielistSlice = createSlice({
 
             const { field } = action.payload;
             const updatedState = updateSortingSetting(state, field);
-            console.log('VALMIS')
             return updatedState
         }
     }
 })
 
-export const { fetchingMovies, setDisplayType, setSortingSettings } = movielistSlice.actions;
+export const { fetchingMovies, setCurretPage, setDisplayType, setSortingSettings } = movielistSlice.actions;
 
 
 export const initializeMovies = () => {

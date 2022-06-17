@@ -42,7 +42,7 @@ const Footer = () => {
 
                 <SocialMedia>
                     <SocialMediaWrap>
-                        <SocialLogo to='/'>dolla</SocialLogo>
+                        <SocialLogo to='/'>Tähtisadetta</SocialLogo>
                         <WebsiteRights>Raimo Haikari © {new Date().getFullYear()} Kaikki oikeudet pidätetään.</WebsiteRights>
 
                         <SocialIcons>

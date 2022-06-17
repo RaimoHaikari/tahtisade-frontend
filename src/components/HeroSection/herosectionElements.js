@@ -3,16 +3,16 @@ import styled from "styled-components";
 import bgImage from "../../images/tahtisade-kansi_2022_06_05B.png"
 
 export const HeroContainer = styled.div`
-    background: #0c0c0c;
+    background: ${({theme}) => theme.hero.backgroundColor};
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 0 30px;
-    height: 600px;
+    height: 500px;
     position: relative;
     z-index: 1;
 
-    /* tän voi varmaanki poistaa.... */
+    /* tän voi varmaanki poistaa.... 
     :before {
         content: '';
         position: absolute;
@@ -31,6 +31,7 @@ export const HeroContainer = styled.div`
 
         z-index: 2;
     }
+    */
 `;
 
 export const HeroBg = styled.div`
@@ -43,7 +44,6 @@ export const HeroBg = styled.div`
     height: 100%;
     overflow: hidden;
 
-    border: 1px solid red;
 
     background-image: url(${bgImage});
     background-repeat: no-repeat;

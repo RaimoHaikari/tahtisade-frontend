@@ -5,7 +5,7 @@ import {FaFacebook} from "react-icons/fa";
 import {FaTwitter} from "react-icons/fa";
 
 export const FooterContainer = styled.footer`
-    background-color: #101522;
+    background-color: ${({theme}) => theme.footer.backgroundColor};
 `;
 
 export const FooterWrap = styled.div`
@@ -104,6 +104,9 @@ export const SocialLogo = styled(Link)`
     align-items: center;
     margin-bottom: 16px;
     font-weight; bold;
+
+    text-transform: uppercase;
+    letter-spacing: .2rem;
 `;
 
 export const WebsiteRights = styled.small`

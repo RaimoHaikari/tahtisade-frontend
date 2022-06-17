@@ -1,4 +1,4 @@
-import {FaBars} from 'react-icons/fa'
+import {FaBars} from 'react-icons/fa';
 
 import {
     Nav,
@@ -10,7 +10,10 @@ import {
     NavLinks,
     NavBtn,
     NavBtnLink
-} from './navbarElements'
+} from './navbarElements';
+
+import { IconContext } from 'react-icons';
+import { Logo } from './logo';
 
 /*
 
@@ -19,40 +22,44 @@ const Navbar = ({ toggle,user }) => {
 
     return (
         <>
-            <Nav>
-                <NavbarContainer>
+            <IconContext.Provider value={{color: '#fff'}}>
+            
+                <Nav>
+                    <NavbarContainer>
 
-                    <NavLogo  to="/">
-                        Tähtisadetta
-                    </NavLogo>
+                        <NavLogo  to="/">
+                            <Logo />
+                        </NavLogo>
 
-                    <MobileIcon
-                        onClick={toggle}
-                    >
-                        <FaBars />
-                    </MobileIcon>
+                        <MobileIcon
+                            onClick={toggle}
+                        >
+                            <FaBars />
+                        </MobileIcon>
 
-                    <NavMenu>
+                        <NavMenu>
 
-                        <NavItem>
-                            <NavLinks to="/elokuvat">Elokuvat</NavLinks>
-                        </NavItem>
-                        <NavItem>
-                            <NavLinks to="/kriitikot">Kriitikot</NavLinks>
-                        </NavItem>
-                        <NavItem>
-                            <NavLinks to="/genret">Genret</NavLinks>
-                        </NavItem>
+                            <NavItem>
+                                <NavLinks to="/elokuvat">Elokuvat</NavLinks>
+                            </NavItem>
+                            <NavItem>
+                                <NavLinks to="/kriitikot">Kriitikot</NavLinks>
+                            </NavItem>
+                            <NavItem>
+                                <NavLinks to="/genret">Genret</NavLinks>
+                            </NavItem>
 
-                    </NavMenu>
+                        </NavMenu>
 
-                    <NavBtn>
-                        <NavBtnLink to="/kirjaudu">Kirjaudu</NavBtnLink>
-                    </NavBtn>
+                        <NavBtn>
+                            <NavBtnLink to="/kirjaudu">Kirjaudu</NavBtnLink>
+                        </NavBtn>
 
 
-                </NavbarContainer>
-            </Nav>
+                    </NavbarContainer>
+                </Nav>
+
+            </IconContext.Provider>
         </>
     );
 

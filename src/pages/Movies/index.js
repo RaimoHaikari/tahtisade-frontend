@@ -1,10 +1,13 @@
 import MovieList from '../../components/MovieList';
+import Search from '../../components/DT/Search';
+import Pagination from '../../components/MovieList/Pagination';
 
 import {
     Aside,
     Container,
     ContentWrap,
-    Main
+    Main,
+    PaginationAndSearch
 } from '../../components/GeneralLayout/ItemList/elements'
 
 const Movies = () => {
@@ -25,6 +28,13 @@ const Movies = () => {
     return (
         <Container>
             <h2>Elokuvat</h2>
+
+            <PaginationAndSearch>
+                <Pagination store="movieList" />
+                <Search
+                    onSearch={(val) => console.log("Pitäs rajoittaa",val)}
+                />
+            </PaginationAndSearch>
 
             <ContentWrap>
                 <Main>

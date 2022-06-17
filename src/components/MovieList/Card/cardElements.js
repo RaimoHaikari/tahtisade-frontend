@@ -12,14 +12,15 @@ export const WRAPPER = styled.div`
     grid-gap: 2rem;
     margin: 2rem;
 
-    @media screen and (max-width: ${({theme}) => theme.breakPoints.sm}){
+    @media screen and (min-width:  ${({theme}) => theme.breakPoints.sm}){
         grid-template-columns: repeat(2, 1fr);
     }
 
-    @media screen and (max-width: ${({theme}) => theme.breakPoints.md}){
-    @media screen and (min-width: 760px){
+    @media screen and (min-width: ${({theme}) => theme.breakPoints.md}){
         grid-template-columns: repeat(3, 1fr);
     }
+
+
 
 `;
 

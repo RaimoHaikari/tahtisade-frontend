@@ -5,6 +5,28 @@ export const Container = styled.div`
     background: ${({ theme }) => theme.colors.backgroundColor};
 `;
 
+/*
+ * L U E T T E L O T
+ *
+ * - E L O K U V A T
+ * - G E N R E T
+ * - A R V O S T E L I J A T
+ */
+export const PaginationAndSearch = styled.div`
+
+    padding-top: ${({theme}) => theme.navbar.height};
+    padding-right: 2px;
+    padding-bottom: 2px;
+    padding-left: 2px;
+
+    display: flex;
+
+    & .paginationContainer {
+        margin-right: auto;
+    }
+`;
+
+
 export const ContentWrap = styled.div`
 
     color: ${({ theme }) => theme.colors.txtDefault};

@@ -1,7 +1,7 @@
 /* eslint-disable default-case */
 import { createSlice } from '@reduxjs/toolkit';
 
-import { setDisplayType, setSortingSettings } from './movieListReducer'
+import { setCurretPage, setDisplayType, setSortingSettings } from './movieListReducer'
 
 const initialState = {};
 
@@ -16,6 +16,21 @@ const sharedSlice = createSlice({
 });
 
 export const { foobar } = sharedSlice.actions;
+
+export const updateCurretPage = (val) => {
+
+    return dispatch => {
+        
+        switch(val.store){
+
+            case 'movieList': 
+
+                dispatch(setCurretPage({page: val.page}));
+                break;
+
+        }
+    }
+}
 
 export const updateDisplayType = (val) => {
 
