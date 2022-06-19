@@ -40,8 +40,8 @@ const GeneralTabs = ({ store }) => {
                         >
                             {
                                 d.content === 'MOVIELIST_TABLE'
-                                ? <TablePresentation />
-                                : <Card />
+                                ? <TablePresentation key={`${i}-tbl`} />
+                                : <Card key={`${i}-card`} />
                             }
                         </CONTAINER>
                     )

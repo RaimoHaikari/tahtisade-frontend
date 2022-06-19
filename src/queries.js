@@ -14,5 +14,8 @@ export const ALL_MOVIES = `
         genre
       }
     }
+    allGenres {
+      genre
+    }
   }
 `;

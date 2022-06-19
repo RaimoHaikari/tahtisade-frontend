@@ -1,4 +1,7 @@
+import { useDispatch } from 'react-redux';
+
 import MovieList from '../../components/MovieList';
+import Genres from '../../components/MovieList/Genres';
 import Search from '../../components/DT/Search';
 import Pagination from '../../components/MovieList/Pagination';
 
@@ -8,22 +11,15 @@ import {
     ContentWrap,
     Main,
     PaginationAndSearch
-} from '../../components/GeneralLayout/ItemList/elements'
+} from '../../components/GeneralLayout/ItemList/elements';
+
+import {
+    updateSearchSetting
+} from '../../reducers/sharedReducer'
 
 const Movies = () => {
 
-    /*
-    const { loading, error, data } = useQuery(ALL_MOVIES);
-
-    
-    if (loading) return (
-        <div>
-            L.a.d.a.t.a.a.n
-        </div>
-    );
-
-    if (error) return `Error! ${error}`;
-    */
+    const dispatch = useDispatch();
 
     return (
         <Container>
@@ -32,7 +28,12 @@ const Movies = () => {
             <PaginationAndSearch>
                 <Pagination store="movieList" />
                 <Search
-                    onSearch={(val) => console.log("Pitäs rajoittaa",val)}
+                    onSearch={(val) => dispatch(
+                        updateSearchSetting({
+                            store: 'movieList',
+                            str: val
+                        })
+                    )}
                 />
             </PaginationAndSearch>
 
@@ -41,7 +42,7 @@ const Movies = () => {
                     <MovieList />
                 </Main>
                 <Aside>
-                    GENRET
+                    <Genres />
                 </Aside>
             </ContentWrap>
 

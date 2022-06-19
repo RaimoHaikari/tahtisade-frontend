@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import bgImage from "../../images/tahtisade-kansi_2022_06_05B.png"
+import bgImage from "../../images/criticism-3083100_1920.960d6d1f.jpg"
 
 export const HeroContainer = styled.div`
     background: ${({theme}) => theme.hero.backgroundColor};
@@ -64,7 +64,7 @@ export const HeroContent = styled.div`
 `;
 
 export const HeroH1 = styled.h1`
-    color: red;
+    color: black;
     font-size: 48px;
     text-align: center;
 
@@ -80,10 +80,14 @@ export const HeroH1 = styled.h1`
 export const HeroP = styled.p`
 
     margin-top: 24px;
-    color: yellow;
+    color: black;
+    font-weight: bold;
     font-size: 24px;
     text-align: center;
     max-width: 600px;
+    background-color: rgba(255,255,255,0.3);
+    border-radius: 10px;
+    padding: 5px;
 
     @media screen and (max-width: 768px){
         font-size: 24px;

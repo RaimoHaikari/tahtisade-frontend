@@ -16,6 +16,9 @@ import {
     SiLastpass
 } from 'react-icons/si';
 
+/*
+ *
+ */
 const DISPLAYTYPE = [
     {
         name: 'Taulukko',
@@ -27,8 +30,7 @@ const DISPLAYTYPE = [
         active: false,
         content: 'MOVIELIST_CARD'
     }
-]
-
+];
 
 /*
 
@@ -56,7 +58,7 @@ const initialState = {
     displayTypes: DISPLAYTYPE,  // Aineiston esittämisen vaihtoehtoiset tavat
     genreNames: null,
     headers: [],               // Huom! Pitää olla jotta tieto voidaan esittää taulukossa
-    itemsPerPage: 4 ,           // Kuinka monen elokuvan tiedot sivulla näytetään kerrallaan
+    itemsPerPage: 30,           // Kuinka monen elokuvan tiedot sivulla näytetään kerrallaan
     maxNumberOfPaginationLinks: 5,
     message: 'Aloitustervehdys',
     moviesLoading: true,    // Ollaanko hakemassa aineistoa palvelimelta
@@ -79,11 +81,20 @@ const initialState = {
  *
  * @todo: Virhetilanteen käsittely puuttuupi
  */
-const displayMovieList = (state, data) => {
+const displayMovieList = (state, movies, genreList) => {
 
-    console.log(data)
+    /* Genrelistan esikäsittely */
+    let newGenreNames = genreList.map(d => {
 
-    let loadedMovieList = data.map(d => {
+        return {
+            name: d.genre,
+            display: true
+        }
+
+    })
+
+    /* - Elokuvien esikäsittely */
+    let loadedMovieList = movies.map(d => {
 
         let productPage = `/elokuvat/:{d.id}`;
         let genres = d.genres.map(g => g.genre);
@@ -118,7 +129,7 @@ const displayMovieList = (state, data) => {
         state.search, 
         state.sortingField, 
         state.sortingOrder,
-        state.genreNames
+        newGenreNames
     );
 
     /*
@@ -137,6 +148,7 @@ const displayMovieList = (state, data) => {
     return {
         ...state,
         allTheMovies: loadedMovieList,
+        genreNames: newGenreNames,
         headers: getHeaders(),
         message: "Sovellus alustettu",
         paginationLinks: paginationLinks,
@@ -155,11 +167,12 @@ const getActiveMovies = (allTheMovies, genreNames) => {
 
     const activeGenres = genreNames
         .filter(g => g.display === true)
-        .map(g => g.id);
+        .map(g => g.name);
 
-        const activeMovies = allTheMovies
+    const activeMovies = allTheMovies
         .filter((movie) => {
             const gList = movie.genre;
+
             const found = gList.some(g => activeGenres.indexOf(g) >= 0)
 
             return found
@@ -404,6 +417,102 @@ const getPaginationLinks = (currentPage, maxNumberOfPaginationLinks, totalPages)
 }
 
 /*
+ * Kytketään tai sammutetaan kaikki genrelistauksen objetit
+ */
+const toggleGenreList = (state, allVisible) => {
+
+    let newGenreNames = state.genreNames.map(g => {
+        return {
+            ...g,
+            display: allVisible
+        }
+    });
+
+
+    // elokuvalista vastaamaan genre-suodatusta
+    let moviesToShow = getPresentedMovieList(
+        state.allTheMovies,
+        state.currentPage, 
+        state.itemsPerPage, 
+        state.search, 
+        state.sortingField, 
+        state.sortingOrder,
+        newGenreNames
+    );
+
+    let newCurrentPage = 1;
+
+   /*
+    * Suodatetaan sivulla näytettävät elokuvat, kun sivutus otetaan huomioon
+    */
+    moviesToShow = getVisibleMovies(moviesToShow, newCurrentPage, state.itemsPerPage);
+
+    let paginationLinks = getPaginationLinks(newCurrentPage, state.maxNumberOfPaginationLinks, state.totalPages);
+
+    return {
+        ...state,
+        genreNames: newGenreNames,
+        currentPage: newCurrentPage,
+        paginationLinks: paginationLinks,
+        visibleData: moviesToShow
+    }
+
+}
+
+const toggleSingleGenre = (state, genreName) => {
+
+    // - genrelistauksen päivitys
+    let newGenreNames = state.genreNames.map(g => {
+
+        let newDisplay = g.display
+
+        if(g.name === genreName){
+            newDisplay = !newDisplay
+        }
+
+        return {
+            ...g,
+            display: newDisplay
+        };
+    })
+
+
+    // elokuvalista vastaamaan genre-suodatusta
+    let moviesToShow = getPresentedMovieList(
+        state.allTheMovies,
+        state.currentPage, 
+        state.itemsPerPage, 
+        state.search, 
+        state.sortingField, 
+        state.sortingOrder,
+        newGenreNames
+    );
+
+    let newCurrentPage = 1;
+
+   /*
+    * Suodatetaan sivulla näytettävät elokuvat, kun sivutus otetaan huomioon
+    */
+    moviesToShow = getVisibleMovies(moviesToShow, newCurrentPage, state.itemsPerPage)
+
+    /*
+     * Sivutukseen tarvittava tieto
+     */
+    let itemsTotal = moviesToShow.length;
+    let pagesTotal = getNumberOfPagesTotal(state, itemsTotal);
+
+    let paginationLinks = getPaginationLinks(newCurrentPage, state.maxNumberOfPaginationLinks, pagesTotal);
+
+    return {
+        ...state,
+        genreNames: newGenreNames,
+        currentPage: newCurrentPage,
+        paginationLinks: paginationLinks,
+        visibleData: moviesToShow
+    }
+}
+
+/*
  * Asetetaan aktiivisen sivun sisältö.
  */
 const updateCurretPage = (state, page) => {
@@ -442,6 +551,55 @@ const updateCurretPage = (state, page) => {
         paginationLinks: paginationLinks,
         currentPage: newCurrentPage
     };
+}
+
+/*
+ * Hakuehdon aiheuttamaan muutokseen reagointi.
+ */
+const updateSearchSetting = (state, str) => {
+
+    let searchStr = str;
+
+    // - päivitetään kävijälle näytettävä elokuvalistaus
+    let moviesToShow = getPresentedMovieList(
+        state.allTheMovies,
+        state.currentPage, 
+        state.itemsPerPage,
+        searchStr, 
+        state.sortingField, 
+        state.sortingOrder,
+        state.genreNames
+    );
+
+    /*
+     * Resetoidaan currentPage
+     */
+    let newCurrentPage = 1;
+
+    /*
+     * Sivutukseen tarvittava tieto
+     */
+    let itemsTotal = moviesToShow.length;
+    let pagesTotal = getNumberOfPagesTotal(state, itemsTotal);
+
+
+    /*
+     * Suodatetaan sivulla näytettävät elokuvat, kun sivutus otetaan huomioon
+     */
+    moviesToShow = getVisibleMovies(moviesToShow, newCurrentPage, state.itemsPerPage);
+
+    let paginationLinks = getPaginationLinks(newCurrentPage, state.maxNumberOfPaginationLinks, pagesTotal);
+
+    return {
+        ...state,
+        currentPage: newCurrentPage,
+        search: searchStr,
+        totalItems: itemsTotal,
+        visibleData: moviesToShow,
+        totalPages: pagesTotal,
+        paginationLinks: paginationLinks
+    }
+
 }
 
 /*
@@ -492,7 +650,7 @@ const movielistSlice = createSlice({
     initialState,
     reducers: {
         fetchingMovies(state, action){
-            const { loading, data } = action.payload;
+            const { genres, loading, movies } = action.payload;
 
             if(loading) { 
                 return {
@@ -501,7 +659,7 @@ const movielistSlice = createSlice({
                 }
             }
 
-            return displayMovieList(state, data);
+            return displayMovieList(state, movies, genres);
         },
         setCurretPage(state, action){
             const { page } = action.payload;
@@ -533,6 +691,20 @@ const movielistSlice = createSlice({
                 displayTypes: updatedTypes
             }
         },
+        setGenreFilter(state, action){
+
+            const { allVisible, name, type } = action.payload;
+
+            if(type === 'single') {
+                return toggleSingleGenre(state, name);
+            }
+
+            return toggleGenreList(state, allVisible);
+        },
+        setSearchSettings(state, action) {
+            const { str } = action.payload;
+            return updateSearchSetting(state, str);
+        },
         setSortingSettings(state, action) {
 
             const { field } = action.payload;
@@ -542,7 +714,14 @@ const movielistSlice = createSlice({
     }
 })
 
-export const { fetchingMovies, setCurretPage, setDisplayType, setSortingSettings } = movielistSlice.actions;
+export const { 
+    fetchingMovies, 
+    setCurretPage, 
+    setDisplayType, 
+    setGenreFilter,
+    setSearchSettings,
+    setSortingSettings 
+} = movielistSlice.actions;
 
 
 export const initializeMovies = () => {
@@ -552,20 +731,50 @@ export const initializeMovies = () => {
         dispatch(fetchingMovies({
             loading: true,
             data: null
-        }))
+        }));
 
         const movies =  await movieService.getGeneralListing();
-
-        // movies.data.allMovies
 
         dispatch(
             fetchingMovies({
                 loading: false,
-                data: movies.data.allMovies
+                movies: movies.data.allMovies,
+                genres: movies.data.allGenres
             })
-        )
+        );
     
     }
+
+}
+
+export const updateGenresVisibility = (val) => {
+
+    return dispatch => {
+        dispatch(
+            setGenreFilter({
+                allVisible: val.active,
+                name: null,
+                type: 'all'
+            })
+        )
+    };
+
+}
+
+/*
+ *
+ */
+export const updateSingleGenreVisibility = (val) => {
+
+    return dispatch => {
+        dispatch(
+            setGenreFilter({
+                allVisible: null,
+                name: val.name,
+                type: 'single'
+            })
+        )
+    };
 
 }
 

@@ -1,7 +1,12 @@
 /* eslint-disable default-case */
 import { createSlice } from '@reduxjs/toolkit';
 
-import { setCurretPage, setDisplayType, setSortingSettings } from './movieListReducer'
+import { 
+    setCurretPage, 
+    setDisplayType, 
+    setSearchSettings,
+    setSortingSettings
+} from './movieListReducer'
 
 const initialState = {};
 
@@ -60,6 +65,25 @@ export const updateDisplayType = (val) => {
                 });
 
                 break;
+        }
+    }
+}
+
+/*
+ * Esitettävään elokuvalistaan suoritettava hakurajaus
+ */
+export const updateSearchSetting = (val) => {
+
+    return dispatch => {
+
+
+        switch(val.store){
+            
+            case 'movieList': 
+
+                dispatch(setSearchSettings({str: val.str}));
+                break;
+
         }
     }
 }

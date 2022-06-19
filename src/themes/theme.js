@@ -31,7 +31,8 @@ const BasicTheme = {
         primaryTitle_FontSize: '3rem'
     },
     general: {
-        lineHeight: '2em'
+        lineHeight: '2em',
+        checkBoxSize: '1.2em'
     },
     colors: {
         backgroundColor: '#411a35',
@@ -46,6 +47,10 @@ const BasicTheme = {
         fontSize: '1em',        // Elokuvakuvakkeen H1, välilehden otsikko
         txtDefault: 'navy',     // Elokuvakuvakkeiden tekstit, Taulukkolistauksen normaali otsikko
         txtActive: 'red',       // Taulukkolistauksen aktivoitu otsikko
+    },
+    toolbar: {
+        backgroundColor: '#f7f6f5',
+        txtHover: 'red',
     }
 }
 
