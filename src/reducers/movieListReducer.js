@@ -96,7 +96,7 @@ const displayMovieList = (state, movies, genreList) => {
     /* - Elokuvien esikäsittely */
     let loadedMovieList = movies.map(d => {
 
-        let productPage = `/elokuvat/:{d.id}`;
+        let productPage = `/elokuvat/${d.googleID}`;
         let genres = d.genres.map(g => g.genre);
 
         /*

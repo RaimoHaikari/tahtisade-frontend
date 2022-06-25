@@ -48,6 +48,7 @@ const App = () => {
         <Routes>
           <Route path="/genret" element={<Genres />} />
           <Route path="/kriitikot" element={<Critics />} />
+          <Route path="/elokuvat/:id" element={<Movie />} />
           <Route path="/elokuvat" element={<Movies />} />
           <Route path="/login" element={<Login onLogin={login} />} />
           <Route path="/" element={<FrontPage />} />

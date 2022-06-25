@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import parse from 'html-react-parser';
 
@@ -19,6 +19,8 @@ import {
 const TablePresentation = () => {
 
     const dispatch = useDispatch();
+
+    const navigate = useNavigate();
 
     const {
         headers, 
@@ -44,6 +46,20 @@ const TablePresentation = () => {
         let regexp = new RegExp(match, "gi");
 
         return parse(str.replace(regexp, replace))
+    }
+
+    /*
+    const rowCliked = (d) => {
+
+        if(d.productPage){
+            history.push(d.productPage);
+        }
+    }
+    */
+    const rowCliked = (d) => {
+
+        if(d.productPage) navigate(d.productPage);
+
     }
 
     const displayTable = () => {
@@ -81,7 +97,11 @@ const TablePresentation = () => {
                     visibleData.map((m)=> {
 
                         return (
-                            <TR key={`${m.googleID}`}>
+                            <TR 
+                                className={m.productPage?'linkToDetails':null}
+                                onClick = {() => rowCliked(m)}
+                                key={`${m.googleID}`}
+                            >
                                 <TD before="Nimi">
                                     {
                                         search !== ''

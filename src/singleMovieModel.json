@@ -1,0 +1,150 @@
+{
+    "id": "12",
+    "img": "http://localhost/tahtisade/wp-content/plugins/reviews-management-tool/assets/posters/lesMiserables.jpg",
+    "nimi": "Les Misérables",
+    "ensiIlta": "2020-03-06",
+    "imdb": "tt10199590",
+    "kavi": "kavi.elonet_elokuva_1613315",
+    "wiki": "Q63246549",
+    "stars": [
+        {
+            "criticId": "eijaNiskanen",
+            "movieId": "12",
+            "stars": 4,
+            "link": "https://kulttuuritoimitus.fi/kritiikit/kritiikit-elokuva/uuden-ajan-kurjat-les-miserables-on-rajahtavan-monikulttuurisen-yhteison-kuvaus/",
+            "publisher": "Kulttuuritoimitus.fi",
+            "name": "Eija Niskanen"
+        },
+        {
+            "criticId": "heikkiIkonen",
+            "movieId": "12",
+            "stars": 4,
+            "link": "Hämeen Sanomat 17.7.2020",
+            "publisher": "Hämeen Sanomat",
+            "name": "Heikki Ikonen"
+        },
+        {
+            "criticId": "iidaSimes",
+            "movieId": "12",
+            "stars": 4,
+            "link": "https://voima.fi/kulttuuriartikkeli/les-miserables/",
+            "publisher": "Voima",
+            "name": "Iida Simes"
+        },
+        {
+            "criticId": "jarnoLindemark",
+            "movieId": "12",
+            "stars": 4,
+            "link": "Elelä-Suomen Sanomat 6.3.2020",
+            "publisher": "Etelä-Suomen Sanomat",
+            "name": "Jarno Lindemark"
+        },
+        {
+            "criticId": "kariSalminen",
+            "movieId": "12",
+            "stars": 3,
+            "link": "Turun Sanomat 6.3.2020",
+            "publisher": "Turun Sanomat",
+            "name": "Kari Salminen"
+        },
+        {
+            "criticId": "kristerUggedal",
+            "movieId": "12",
+            "stars": 4,
+            "link": "Hufvudstadsbladet 6.3.2020",
+            "publisher": "Hufvudstadsbladet",
+            "name": "Krister Uggeldahl"
+        },
+        {
+            "criticId": "martaBalaga",
+            "movieId": "12",
+            "stars": 3,
+            "link": "https://www.episodi.fi/elokuvat/les-miserables-2/",
+            "publisher": "Episodi",
+            "name": "Marta Balaga"
+        },
+        {
+            "criticId": "sannaWirratvuori",
+            "movieId": "12",
+            "stars": 4,
+            "link": "Eeva 3/2020",
+            "publisher": "Eeva",
+            "name": "Sanna Wirtavuori"
+        },
+        {
+            "criticId": "tr",
+            "movieId": "12",
+            "stars": 4,
+            "link": "Seiska 10/2020",
+            "publisher": "Seiska",
+            "name": "T R"
+        }
+    ],
+    "actors": [
+        {
+            "movieId": "12",
+            "nimi": "Alexis Manenti",
+            "kaviId": "elonet_henkilo_1544782"
+        },
+        {
+            "movieId": "12",
+            "nimi": "Damien Bonnard",
+            "kaviId": "elonet_henkilo_1544783"
+        },
+        {
+            "movieId": "12",
+            "nimi": "Djebril Zonga",
+            "kaviId": "elonet_henkilo_1544784"
+        },
+        {
+            "movieId": "12",
+            "nimi": "Issa Perica",
+            "kaviId": "elonet_henkilo_1544785"
+        }
+    ],
+    "directors": [
+        {
+            "movieId": "12",
+            "nimi": "Ladj Ly",
+            "kaviId": "elonet_henkilo_1544780"
+        }
+    ],
+    "distributors": [
+        {
+            "movieId": "12",
+            "nimi": "Cinemanse Oy",
+            "kaviId": "elonet_yhtio_1488304"
+        }
+    ],
+    "genre": [
+        {
+            "genreId": 6,
+            "nimi": "Crime"
+        },
+        {
+            "genreId": 7,
+            "nimi": "Thriller"
+        },
+        {
+            "genreId": 8,
+            "nimi": "Drama"
+        }
+    ],
+    "writers": [
+        {
+            "movieId": "12",
+            "nimi": "Ladj Ly",
+            "kaviId": "elonet_henkilo_1544780"
+        },
+        {
+            "movieId": "12",
+            "nimi": "Giordano Gederlini",
+            "kaviId": "elonet_henkilo_1544781"
+        },
+        {
+            "movieId": "12",
+            "nimi": "Alexis Manenti",
+            "kaviId": "elonet_henkilo_1544782"
+        }
+    ]
+}

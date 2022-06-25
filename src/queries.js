@@ -19,3 +19,20 @@ export const ALL_MOVIES = `
     }
   }
 `;
+
+export const MOVIE_DETAILS = `
+  query movieDetails($googleId: Int!) {
+    movieDetails(googleID: $googleId) {
+      nimi
+      director {
+        nimi
+      },
+      distributor {
+        nimi
+      },
+      actors {
+        nimi
+      }
+    }
+  }
+`;
