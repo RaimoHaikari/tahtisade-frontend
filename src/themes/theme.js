@@ -47,6 +47,8 @@ const BasicTheme = {
         fontSize: '1em',        // Elokuvakuvakkeen H1, välilehden otsikko
         txtDefault: 'navy',     // Elokuvakuvakkeiden tekstit, Taulukkolistauksen normaali otsikko
         txtActive: 'red',       // Taulukkolistauksen aktivoitu otsikko
+        txtGray: '#b6b0a9ff',
+        txtWhite: '#ffffff'
     },
     toolbar: {
         backgroundColor: '#f7f6f5',

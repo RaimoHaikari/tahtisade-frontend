@@ -1,3 +1,766 @@
+export const SelectedGenreData = [
+    {
+        "id": "tyhja",
+        "name": "Ei vertailua",
+        "total": 0,
+        "values": [
+            {
+                "stars": "0",
+                "total": 0
+            },
+            {
+                "stars": "1",
+                "total": 0
+            },
+            {
+                "stars": "2",
+                "total": 0
+            },
+            {
+                "stars": "3",
+                "total": 0
+            },
+            {
+                "stars": "4",
+                "total": 0
+            },
+            {
+                "stars": "5",
+                "total": 0
+            }
+        ]
+    },
+    {
+        "id": "kaikki",
+        "name": "Kaikki elokuvat",
+        "total": 49,
+        "values": [
+            {
+                "stars": "0",
+                "total": 0
+            },
+            {
+                "stars": "1",
+                "total": 16
+            },
+            {
+                "stars": "2",
+                "total": 74
+            },
+            {
+                "stars": "3",
+                "total": 123
+            },
+            {
+                "stars": "4",
+                "total": 106
+            },
+            {
+                "stars": "5",
+                "total": 28
+            }
+        ]
+    },
+    {
+        "id": "muut",
+        "name": "Muut genret",
+        "total": 46,
+        "values": [
+            {
+                "stars": "0",
+                "total": 0
+            },
+            {
+                "stars": "1",
+                "total": 16
+            },
+            {
+                "stars": "2",
+                "total": 74
+            },
+            {
+                "stars": "3",
+                "total": 116
+            },
+            {
+                "stars": "4",
+                "total": 87
+            },
+            {
+                "stars": "5",
+                "total": 18
+            }
+        ]
+    },
+    {
+        "id": "5",
+        "name": "Action",
+        "total": 5,
+        "values": [
+            {
+                "stars": "0",
+                "total": 0
+            },
+            {
+                "stars": "1",
+                "total": 4
+            },
+            {
+                "stars": "2",
+                "total": 14
+            },
+            {
+                "stars": "3",
+                "total": 16
+            },
+            {
+                "stars": "4",
+                "total": 4
+            },
+            {
+                "stars": "5",
+                "total": 0
+            }
+        ]
+    },
+    {
+        "id": "1",
+        "name": "Adventure",
+        "total": 7,
+        "values": [
+            {
+                "stars": "0",
+                "total": 0
+            },
+            {
+                "stars": "1",
+                "total": 2
+            },
+            {
+                "stars": "2",
+                "total": 0
+            },
+            {
+                "stars": "3",
+                "total": 18
+            },
+            {
+                "stars": "4",
+                "total": 2
+            },
+            {
+                "stars": "5",
+                "total": 0
+            }
+        ]
+    },
+    {
+        "id": "12",
+        "name": "Animation",
+        "total": 6,
+        "values": [
+            {
+                "stars": "0",
+                "total": 0
+            },
+            {
+                "stars": "1",
+                "total": 2
+            },
+            {
+                "stars": "2",
+                "total": 6
+            },
+            {
+                "stars": "3",
+                "total": 9
+            },
+            {
+                "stars": "4",
+                "total": 7
+            },
+            {
+                "stars": "5",
+                "total": 0
+            }
+        ]
+    },
+    {
+        "id": "18",
+        "name": "Biography",
+        "total": 6,
+        "values": [
+            {
+                "stars": "0",
+                "total": 0
+            },
+            {
+                "stars": "1",
+                "total": 0
+            },
+            {
+                "stars": "2",
+                "total": 0
+            },
+            {
+                "stars": "3",
+                "total": 4
+            },
+            {
+                "stars": "4",
+                "total": 0
+            },
+            {
+                "stars": "5",
+                "total": 17
+            }
+        ]
+    },
+    {
+        "id": "2",
+        "name": "Comedy",
+        "total": 21,
+        "values": [
+            {
+                "stars": "0",
+                "total": 0
+            },
+            {
+                "stars": "1",
+                "total": 11
+            },
+            {
+                "stars": "2",
+                "total": 45
+            },
+            {
+                "stars": "3",
+                "total": 45
+            },
+            {
+                "stars": "4",
+                "total": 37
+            },
+            {
+                "stars": "5",
+                "total": 17
+            }
+        ]
+    },
+    {
+        "id": "6",
+        "name": "Crime",
+        "total": 6,
+        "values": [
+            {
+                "stars": "0",
+                "total": 0
+            },
+            {
+                "stars": "1",
+                "total": 3
+            },
+            {
+                "stars": "2",
+                "total": 0
+            },
+            {
+                "stars": "3",
+                "total": 10
+            },
+            {
+                "stars": "4",
+                "total": 11
+            },
+            {
+                "stars": "5",
+                "total": 0
+            }
+        ]
+    },
+    {
+        "id": "9",
+        "name": "Document",
+        "total": 3,
+        "values": [
+            {
+                "stars": "0",
+                "total": 0
+            },
+            {
+                "stars": "1",
+                "total": 0
+            },
+            {
+                "stars": "2",
+                "total": 0
+            },
+            {
+                "stars": "3",
+                "total": 3
+            },
+            {
+                "stars": "4",
+                "total": 10
+            },
+            {
+                "stars": "5",
+                "total": 2
+            }
+        ]
+    },
+    {
+        "id": "8",
+        "name": "Drama",
+        "total": 29,
+        "values": [
+            {
+                "stars": "0",
+                "total": 0
+            },
+            {
+                "stars": "1",
+                "total": 6
+            },
+            {
+                "stars": "2",
+                "total": 41
+            },
+            {
+                "stars": "3",
+                "total": 83
+            },
+            {
+                "stars": "4",
+                "total": 77
+            },
+            {
+                "stars": "5",
+                "total": 24
+            }
+        ]
+    },
+    {
+        "id": "4",
+        "name": "Family",
+        "total": 7,
+        "values": [
+            {
+                "stars": "0",
+                "total": 0
+            },
+            {
+                "stars": "1",
+                "total": 4
+            },
+            {
+                "stars": "2",
+                "total": 21
+            },
+            {
+                "stars": "3",
+                "total": 16
+            },
+            {
+                "stars": "4",
+                "total": 9
+            },
+            {
+                "stars": "5",
+                "total": 0
+            }
+        ]
+    },
+    {
+        "id": "17",
+        "name": "History",
+        "total": 1,
+        "values": [
+            {
+                "stars": "0",
+                "total": 0
+            },
+            {
+                "stars": "1",
+                "total": 0
+            },
+            {
+                "stars": "2",
+                "total": 0
+            },
+            {
+                "stars": "3",
+                "total": 1
+            },
+            {
+                "stars": "4",
+                "total": 1
+            },
+            {
+                "stars": "5",
+                "total": 0
+            }
+        ]
+    },
+    {
+        "id": "15",
+        "name": "Horror",
+        "total": 4,
+        "values": [
+            {
+                "stars": "0",
+                "total": 0
+            },
+            {
+                "stars": "1",
+                "total": 0
+            },
+            {
+                "stars": "2",
+                "total": 2
+            },
+            {
+                "stars": "3",
+                "total": 7
+            },
+            {
+                "stars": "4",
+                "total": 5
+            },
+            {
+                "stars": "5",
+                "total": 1
+            }
+        ]
+    },
+    {
+        "id": "10",
+        "name": "Mystery",
+        "total": 2,
+        "values": [
+            {
+                "stars": "0",
+                "total": 0
+            },
+            {
+                "stars": "1",
+                "total": 1
+            },
+            {
+                "stars": "2",
+                "total": 1
+            },
+            {
+                "stars": "3",
+                "total": 4
+            },
+            {
+                "stars": "4",
+                "total": 2
+            },
+            {
+                "stars": "5",
+                "total": 1
+            }
+        ]
+    },
+    {
+        "id": "11",
+        "name": "Romance",
+        "total": 3,
+        "values": [
+            {
+                "stars": "0",
+                "total": 0
+            },
+            {
+                "stars": "1",
+                "total": 0
+            },
+            {
+                "stars": "2",
+                "total": 3
+            },
+            {
+                "stars": "3",
+                "total": 0
+            },
+            {
+                "stars": "4",
+                "total": 9
+            },
+            {
+                "stars": "5",
+                "total": 13
+            }
+        ]
+    },
+    {
+        "id": "16",
+        "name": "SciFi",
+        "total": 2,
+        "values": [
+            {
+                "stars": "0",
+                "total": 0
+            },
+            {
+                "stars": "1",
+                "total": 0
+            },
+            {
+                "stars": "2",
+                "total": 1
+            },
+            {
+                "stars": "3",
+                "total": 7
+            },
+            {
+                "stars": "4",
+                "total": 5
+            },
+            {
+                "stars": "5",
+                "total": 1
+            }
+        ]
+    },
+    {
+        "id": "21",
+        "name": "Sport",
+        "total": 1,
+        "values": [
+            {
+                "stars": "0",
+                "total": 0
+            },
+            {
+                "stars": "1",
+                "total": 0
+            },
+            {
+                "stars": "2",
+                "total": 2
+            },
+            {
+                "stars": "3",
+                "total": 3
+            },
+            {
+                "stars": "4",
+                "total": 1
+            },
+            {
+                "stars": "5",
+                "total": 2
+            }
+        ]
+    },
+    {
+        "id": "7",
+        "name": "Thriller",
+        "total": 3,
+        "values": [
+            {
+                "stars": "0",
+                "total": 0
+            },
+            {
+                "stars": "1",
+                "total": 0
+            },
+            {
+                "stars": "2",
+                "total": 0
+            },
+            {
+                "stars": "3",
+                "total": 7
+            },
+            {
+                "stars": "4",
+                "total": 19
+            },
+            {
+                "stars": "5",
+                "total": 10
+            }
+        ]
+    },
+    {
+        "id": "19",
+        "name": "War",
+        "total": 3,
+        "values": [
+            {
+                "stars": "0",
+                "total": 0
+            },
+            {
+                "stars": "1",
+                "total": 0
+            },
+            {
+                "stars": "2",
+                "total": 3
+            },
+            {
+                "stars": "3",
+                "total": 7
+            },
+            {
+                "stars": "4",
+                "total": 0
+            },
+            {
+                "stars": "5",
+                "total": 12
+            }
+        ]
+    }
+]
+
+export const GenreListData = [
+    {
+        "id": 1,
+        "genre": "Adventure",
+        "numberOfMovies": 7,
+        "numberOfReviews": 65,
+        "starsAverage": 2.88,
+        "productPage": "genres/1"
+    },
+    {
+        "id": 2,
+        "genre": "Comedy",
+        "numberOfMovies": 21,
+        "numberOfReviews": 218,
+        "starsAverage": 3.04,
+        "productPage": "genres/2"
+    },
+    {
+        "id": 4,
+        "genre": "Family",
+        "numberOfMovies": 7,
+        "numberOfReviews": 64,
+        "starsAverage": 2.55,
+        "productPage": "genres/4"
+    },
+    {
+        "id": 5,
+        "genre": "Action",
+        "numberOfMovies": 5,
+        "numberOfReviews": 60,
+        "starsAverage": 2.76,
+        "productPage": "genres/5"
+    },
+    {
+        "id": 6,
+        "genre": "Crime",
+        "numberOfMovies": 6,
+        "numberOfReviews": 80,
+        "starsAverage": 3.14,
+        "productPage": "genres/6"
+    },
+    {
+        "id": 7,
+        "genre": "Thriller",
+        "numberOfMovies": 3,
+        "numberOfReviews": 62,
+        "starsAverage": 3.44,
+        "productPage": "genres/7"
+    },
+    {
+        "id": 8,
+        "genre": "Drama",
+        "numberOfMovies": 29,
+        "numberOfReviews": 399,
+        "starsAverage": 3.41,
+        "productPage": "genres/8"
+    },
+    {
+        "id": 9,
+        "genre": "Document",
+        "numberOfMovies": 3,
+        "numberOfReviews": 28,
+        "starsAverage": 3.84,
+        "productPage": "genres/9"
+    },
+    {
+        "id": 10,
+        "genre": "Mystery",
+        "numberOfMovies": 2,
+        "numberOfReviews": 27,
+        "starsAverage": 2.78,
+        "productPage": "genres/10"
+    },
+    {
+        "id": 11,
+        "genre": "Romance",
+        "numberOfMovies": 3,
+        "numberOfReviews": 47,
+        "starsAverage": 3.5,
+        "productPage": "genres/11"
+    },
+    {
+        "id": 12,
+        "genre": "Animation",
+        "numberOfMovies": 6,
+        "numberOfReviews": 41,
+        "starsAverage": 2.6,
+        "productPage": "genres/12"
+    },
+    {
+        "id": 15,
+        "genre": "Horror",
+        "numberOfMovies": 4,
+        "numberOfReviews": 56,
+        "starsAverage": 2.89,
+        "productPage": "genres/15"
+    },
+    {
+        "id": 16,
+        "genre": "SciFi",
+        "numberOfMovies": 2,
+        "numberOfReviews": 15,
+        "starsAverage": 3.33,
+        "productPage": "genres/16"
+    },
+    {
+        "id": 17,
+        "genre": "History",
+        "numberOfMovies": 1,
+        "numberOfReviews": 8,
+        "starsAverage": 3.56,
+        "productPage": "genres/17"
+    },
+    {
+        "id": 18,
+        "genre": "Biography",
+        "numberOfMovies": 6,
+        "numberOfReviews": 76,
+        "starsAverage": 3.6,
+        "productPage": "genres/18"
+    },
+    {
+        "id": 19,
+        "genre": "War",
+        "numberOfMovies": 3,
+        "numberOfReviews": 38,
+        "starsAverage": 3.78,
+        "productPage": "genres/19"
+    },
+    {
+        "id": 21,
+        "genre": "Sport",
+        "numberOfMovies": 1,
+        "numberOfReviews": 8,
+        "starsAverage": 3.44,
+        "productPage": "genres/21"
+    }
+]
+
+
 export const MovieListData = [
     {
         "id": "1",

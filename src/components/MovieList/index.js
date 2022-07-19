@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import GeneralTabs from './Tabs/generalTabs';
+import CountDown from '../CountDown';
 
 import { initializeMovies } from "../../reducers/movieListReducer";
 
@@ -25,7 +26,7 @@ const MovieList = () => {
         <>
             {
                 moviesLoading === true
-                ? <div>L.A.D.A.T.A.A.N</div>
+                ? <CountDown />
                 : <GeneralTabs store='movieList' />
             }
         </>

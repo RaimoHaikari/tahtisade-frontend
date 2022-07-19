@@ -1,3 +1,164 @@
+import {
+  SiFirst,
+  SiLastpass
+} from "react-icons/si";
+
+/*
+ * Keskiarvon laskeva funktio
+ *
+ * Lähde:
+ * 
+ * How to compute the sum and average of elements in an array?
+ * - https://stackoverflow.com/questions/10359907/how-to-compute-the-sum-and-average-of-elements-in-an-array
+ */
+export const average = arr => arr.reduce( (p, c ) => p + c, 0 ) / arr.length;
+
+/*
+ * Montako sivua tarvitaan, että kaikki objektit saadaa esitettyä, kun yhdelle sivulle 
+ * mahtuu korkeintaan [itemsPerPage] objektia
+ * 
+ * Sivutukseen tarvittava tieto
+ */
+export const getNumberOfPagesTotal = (state, itemsTotal) => {
+
+  //let pagesTotal = state.totalPages;
+  let pagesTotal = 0;
+  let itemsPerPage = state.itemsPerPage;
+
+  if(itemsTotal > 0 && itemsPerPage > 0)
+      pagesTotal = (Math.ceil(itemsTotal / itemsPerPage))
+
+  return pagesTotal
+}
+
+
+/*
+ * Lasketaan sivutuslinkeissä esitettävien sivut.
+ * - linkkien muodostamisen ensimmäinen vaihe
+ */
+const getPaginationIndexes = (currentPage, maxNumberOfPaginationLinks, totalPages) => {
+
+  let alaRaja = 1;
+  let vasen = true;           // Onko "vasemmalla tilaa"
+  let ylaRaja = totalPages;
+  let oikea = true;           // Onko "oikealla tilaa"
+
+  let i = 0;
+  let j = 1;                  // Kytkin jonka avulla laskurin arvoa käännetään positivisen ja negatiivisen välillä
+  let index = currentPage;
+
+  let indexes = [];
+
+  let valmis = false
+
+  do {
+      index = index + (i * j);
+
+      // lisätään sivu, mikäli indeksi taulukon sisällä
+      if((index >= alaRaja) && (index <= ylaRaja))
+          indexes.push(index)
+
+      /*
+       * Onko taulukossa vielä pienempiä / suurempia indeksejä
+       */
+      if(index === alaRaja)
+          vasen = false;
+
+      if(index === ylaRaja)
+          oikea = false;
+
+      /*
+       * Jatketaanko silmukkaa
+       * - riittävä määrä sivuja kasassa
+       */
+      if(indexes.length === maxNumberOfPaginationLinks)
+          valmis = true;
+      
+
+      /*
+       * Sivulle mahtuu enemmän objekteja, kuin mitä kantaan on talletettu.
+       * Ei siis tarvetta sivutukselle.
+       * - numberOfItems > totalPages
+       */
+      if(vasen===false & oikea===false)
+          valmis = true;
+
+      // päivitetään laskurit
+      j *= -1;
+      i++;
+
+  }
+  while(valmis !== true)
+  //while(i < maxNumberOfPaginationLinks && valmis !== true)
+
+  return indexes.sort((a,b) => a - b);
+}
+
+/*
+ * Sivutuslinkkien alustus
+ * - selvitetään mitkä sivut on pitää näyttää tulostettavassa Pagination listauksessa
+ * - muotoillaan linkit.
+ */
+export const getPaginationLinks = (currentPage, maxNumberOfPaginationLinks, totalPages) => {
+    
+    let indexes = getPaginationIndexes(currentPage, maxNumberOfPaginationLinks, totalPages);
+
+    indexes = indexes.map((index,i) => {
+
+        let linkLabel = index;
+        let linkIindex = index;
+        let linkClass = "numb";
+
+        /*
+         * Korjataan tarvittaessa ensimmäinen linkki osoittamaan ensimmäiselle sivulle
+         */
+        if((i) === 0){
+            if(index > 1) {
+                linkIindex = 1
+                linkLabel = <SiFirst />
+                linkClass = "btn prev"
+            }
+        }
+
+        /*
+         * Korjataan tarvittaessa viimeinen linkki osoittamaan viimeiselle sivulle
+         */
+        if((i+1) === maxNumberOfPaginationLinks){
+            if(index < totalPages) {
+                linkIindex = totalPages
+                linkLabel = <SiLastpass />
+                linkClass = "btn next"
+            }
+        }
+
+        /* Aktiivisen sivun korostus */
+        if(index === currentPage)
+            linkClass="numb active"
+
+
+        return {
+            className: linkClass,
+            index: linkIindex,
+            label: linkLabel
+        }
+    })
+
+
+    return indexes
+}
+
+/*
+ * Sivulla näytettävät objektit, kun sivutus otetaan huomioon.
+ */
+export const getVisibleItems = (itemsUpToLevel, currentPage, itemsPerPage) => {
+
+  return itemsUpToLevel.slice(
+      (currentPage - 1) * itemsPerPage,
+      (currentPage - 1) * itemsPerPage + itemsPerPage
+  );
+
+}
+
 /*
  * Desimaalifunktion pyöristämisessä käyettävä apufunktio
  *
@@ -12,11 +173,22 @@ export const round = (value, precision) => {
 }
 
 /*
- * Keskiarvon laskeva funktio
- *
- * Lähde:
- * 
- * How to compute the sum and average of elements in an array?
- * - https://stackoverflow.com/questions/10359907/how-to-compute-the-sum-and-average-of-elements-in-an-array
+ * Check if a JavaScript string is a URL
+ * https://stackoverflow.com/questions/5717093/check-if-a-javascript-string-is-a-url
  */
-export const average = arr => arr.reduce( (p, c ) => p + c, 0 ) / arr.length;
+export const validURL = (str) => {
+
+    var pattern = new RegExp('^(https?:\\/\\/)?'+           // protocol
+      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+   // domain name
+      '((\\d{1,3}\\.){3}\\d{1,3}))'+                        // OR ip (v4) address
+      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+                    // port and path
+      '(\\?[;&a-z\\d%_.~+=-]*)?'+                           // query string
+      '(\\#[-a-z\\d_]*)?$','i');                            // fragment locator
+
+    return !!pattern.test(str);
+}
+
+export const posterUrl = (src) => {
+  return `http://www.tahtisadetta.fi/posters/${src}`;
+}
+

@@ -8,7 +8,7 @@ import { createSlice } from '@reduxjs/toolkit';
  */
 import movieService from '../services/movies';
 
-import { average, round } from '../misc/helperFunctions';
+import { average, posterUrl , round } from '../misc/helperFunctions';
 
 
 import {
@@ -105,6 +105,7 @@ const displayMovieList = (state, movies, genreList) => {
         */
         return {
             ...d,
+            img: posterUrl(d.img),
             productPage: productPage,
             genre: genres,
             numberOfReviews: d.reviews.length,

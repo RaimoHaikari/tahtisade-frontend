@@ -1,11 +1,53 @@
-import React from 'react';
+import { useDispatch } from "react-redux";
+
+import {
+    Aside,
+    Container,
+    ContentWrap,
+    Main,
+    PaginationAndSearch
+} from "../../components/GeneralLayout/ItemList/elements";
+
+//import Togglable from "../../components/GeneralLayout/Togglable";
+
+import GenreList from "../../components/GenreList";
+
+import Pagination from "../../components/MovieList/Pagination/GeneralPagination";
+import Search from "../../components/DT/Search";
+
+import { updateSearchSetting } from "../../reducers/sharedReducer";
+
 
 const Genres = () => {
+
+    const dispatch = useDispatch();
+
     return (
-        <div>
-            <h2>Genret</h2>
-            <p>Kuinka arvosanat ovat jakautuneet eri genreeen kuuluvien elokuvien kesken</p>
-        </div>
+        <Container>
+
+            <PaginationAndSearch>
+                <Pagination
+                    store="genreList"
+                />
+                <Search 
+                    onSearch={(val) => dispatch(
+                        updateSearchSetting({
+                            store: 'genreList',
+                            str: val
+                        })
+                    )}
+                />
+            </PaginationAndSearch>
+
+            <ContentWrap>
+                <Main>
+                    <GenreList />
+                </Main>
+                <Aside>
+                </Aside>
+            </ContentWrap>
+
+        </Container>
     );
 };
 

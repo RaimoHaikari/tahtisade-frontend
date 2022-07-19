@@ -6,7 +6,13 @@ import {
     setDisplayType, 
     setSearchSettings,
     setSortingSettings
-} from './movieListReducer'
+} from './movieListReducer';
+
+import { 
+    setSearchSettings as setGenrelistSearchSettings,
+    setSortingSettings as setGenrelistSortingSettings,
+    setCurretPage as setGenrelistCurretPage
+} from './genreListReducer';
 
 const initialState = {};
 
@@ -30,7 +36,12 @@ export const updateCurretPage = (val) => {
 
             case 'movieList': 
 
-                dispatch(setCurretPage({page: val.page}));
+                dispatch(setCurretPage({ page: val.page }));
+                break;
+
+            case 'genreList':
+
+                dispatch(setGenrelistCurretPage({ page: val.page }));
                 break;
 
         }
@@ -81,7 +92,12 @@ export const updateSearchSetting = (val) => {
             
             case 'movieList': 
 
-                dispatch(setSearchSettings({str: val.str}));
+                dispatch(setSearchSettings({ str: val.str }));
+                break;
+
+            case 'genreList':
+
+                dispatch(setGenrelistSearchSettings({ str: val.str }));
                 break;
 
         }
@@ -97,6 +113,9 @@ export const updateSortingSetting = (val) => {
 
             case 'movieList': 
                 dispatch(setSortingSettings({field: val.field}));
+                break;
+            case 'genreList':
+                dispatch(setGenrelistSortingSettings({field: val.field}));
                 break;
 
         }

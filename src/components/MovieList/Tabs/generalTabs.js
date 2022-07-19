@@ -9,6 +9,7 @@ import TablePresentation from '../components/MovieList/TablePresentation';
 */
 import Card from '../Card';
 import TablePresentation from '../TablePresentation';
+import GeneralTable from '../TablePresentation/GeneralTable';
 
 import {
     TAB,
@@ -26,6 +27,27 @@ const GeneralTabs = ({ store }) => {
 
     const { displayTypes } = useSelector(state => state[store]);
 
+    /* 
+     *
+     */
+    const displayContent = (d, i) => {
+
+        // eslint-disable-next-line default-case
+        switch(d.content) {
+            case 'MOVIELIST_TABLE':
+                return <TablePresentation key={`${i}-tbl`} />
+            case 'MOVIELIST_CARD':
+                return <Card key={`${i}-card`} />
+            case 'GENRELIST_TABLE':
+                return <GeneralTable key={`${i}-tbl`} store='genreList' />
+
+          }
+
+    }
+    
+    /*
+     *
+     */
     const getTabContent = () => {
 
         return (
@@ -39,9 +61,7 @@ const GeneralTabs = ({ store }) => {
                             visible={d.active}
                         >
                             {
-                                d.content === 'MOVIELIST_TABLE'
-                                ? <TablePresentation key={`${i}-tbl`} />
-                                : <Card key={`${i}-card`} />
+                                displayContent(d, i)
                             }
                         </CONTAINER>
                     )
@@ -77,7 +97,10 @@ const GeneralTabs = ({ store }) => {
         )
     }
 
-
+    /*
+    { getTabLinks() }
+    { getTabContent() }
+    */
     return (
         <div>
             { getTabLinks() }

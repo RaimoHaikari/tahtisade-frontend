@@ -35,7 +35,7 @@ const Card = () => {
         return (
             <KONTTI 
                 key={`${googleID}-${index}`}
-                to={`/movies/${googleID}`}
+                to={`/elokuvat/${googleID}`}
                 className="KuvaKontti"
             >
                 <BANNER />
@@ -64,10 +64,6 @@ const Card = () => {
 
         return val;
     }
-
-    /*
-
-    */
 
     return (
         <WRAPPER className="kuvakeRapperi">
