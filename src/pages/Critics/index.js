@@ -9,7 +9,9 @@ import {
 } from "../../components/GeneralLayout/ItemList/elements";
 
 import ReviewerList from "../../components/ReviewerList";
+import Pagination from "../../components/MovieList/Pagination/GeneralPagination";
 import Toolbar from "../../components/ReviewerList/Toolbar";
+import Search from "../../components/DT/Search";
 
 import { updateSearchSetting } from "../../reducers/sharedReducer";
 
@@ -23,8 +25,17 @@ const Critics = () => {
         <Container>
         
             <PaginationAndSearch>
-                <div>P.A.G.I.N.A.T.I.O.N</div>
-                <div>S.E.A.R.C.H</div>
+
+                <Pagination store='reviewerList' />
+
+                <Search 
+                    onSearch={(val) => dispatch(
+                        updateSearchSetting({
+                            store: 'reviewerList',
+                            str: val
+                        })
+                    )}
+                />
             </PaginationAndSearch>
 
             <ContentWrap>

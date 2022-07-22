@@ -225,6 +225,102 @@ const setMinNumberOfReviews = (state, value) => {
 
 }
 
+const updateCurretPage = (state, page) => {
+
+    let newCurrentPage = page;
+
+    // - päivitetään kävijälle näytettävä arvostelijalistaus
+    let reviewersToShow = getFilteredItemsList(
+        state.data,
+        state.search, 
+        state.sortingField, 
+        state.sortingOrder, 
+        state.numberOfReviews.value
+    );
+
+
+    /*
+     * Sivutukseen tarvittava tieto
+     */
+    let itemsTotal = reviewersToShow.length;
+    let pagesTotal = getNumberOfPagesTotal(state, itemsTotal);
+
+    /*
+     * Suodatetaan sivulla näytettävät elokuvat, kun sivutus otetaan huomioon &
+     * vaihdetaan tähdet numeroiden tilalle merkkaamaan keskiarvoa
+     */
+    reviewersToShow = prune(
+        reviewersToShow, 
+        newCurrentPage, 
+        state.itemsPerPage,
+        'starsAverage', 
+        'visualizedStars'
+    );
+
+    let paginationLinks = getPaginationLinks(newCurrentPage, state.maxNumberOfPaginationLinks, pagesTotal);
+
+    return {
+        ...state,
+        totalItems: itemsTotal,
+        totalPages: pagesTotal,
+        visibleData: reviewersToShow,
+        paginationLinks: paginationLinks,
+        currentPage: newCurrentPage
+    };
+}
+
+/*
+ * Hakutermin muutos
+ */
+const updateSearchSetting = (state, str) => {
+
+    let searchStr = str;
+
+
+    // - päivitetään kävijälle näytettävä elokuvalistaus
+    let reviewersToShow = getFilteredItemsList(
+        state.data,
+        searchStr, 
+        state.sortingField, 
+        state.sortingOrder, 
+        state.numberOfReviews.value
+    );
+
+    /*
+     * Sivutukseen tarvittava tieto
+     */
+    let itemsTotal = reviewersToShow.length;
+    let pagesTotal = getNumberOfPagesTotal(state, itemsTotal);
+
+    let newCurrentPage = 1;
+
+    /*
+     * Suodatetaan sivulla näytettävät elokuvat, kun sivutus otetaan huomioon &
+     * vaihdetaan tähdet numeroiden tilalle merkkaamaan keskiarvoa
+     */
+    reviewersToShow = prune(
+        reviewersToShow, 
+        newCurrentPage, 
+        state.itemsPerPage,
+        'starsAverage', 
+        'visualizedStars'
+    );
+
+    let paginationLinks = getPaginationLinks(newCurrentPage, state.maxNumberOfPaginationLinks, pagesTotal);
+
+    /*
+    */
+    return {
+        ...state,
+        currentPage: newCurrentPage,
+        paginationLinks: paginationLinks,
+        search: searchStr,
+        totalItems: itemsTotal,
+        totalPages: pagesTotal,
+        visibleData: reviewersToShow,
+    }
+}
+
 /*
  * Lajittelujärjestyksen muutos
  */
@@ -282,6 +378,13 @@ const reviewerlistSlice = createSlice({
     name: 'reviewerList',
     initialState,
     reducers: {
+        changeMinNumbOfReviews(state, action) {
+
+            const { value } = action.payload;
+
+            return setMinNumberOfReviews(state, value);
+
+        },
         fetchingData(state, action){
 
             const { loading,reviewers} = action.payload;
@@ -295,25 +398,32 @@ const reviewerlistSlice = createSlice({
 
             return displayReviewerList(state, reviewers);
         },
+        setCurretPage(state, action) {
+
+            const { page } = action.payload;
+
+            return updateCurretPage(state, page);
+        },
+        setSearchSettings(state, action) {
+
+            const { str } = action.payload;
+            return updateSearchSetting(state, str);
+
+        },
         setSortingSettings(state, action){
 
             const { field } = action.payload;
             return updateSortingSettings(state, field);
-
-        },
-        changeMinNumbOfReviews(state, action) {
-
-            const { value } = action.payload;
-
-            return setMinNumberOfReviews(state, value);
 
         }
     }
 })
 
 export const { 
-    fetchingData,
     changeMinNumbOfReviews,
+    fetchingData,
+    setCurretPage,
+    setSearchSettings,
     setSortingSettings
 } = reviewerlistSlice.actions;
 

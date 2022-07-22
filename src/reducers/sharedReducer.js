@@ -15,7 +15,9 @@ import {
 } from './genreListReducer';
 
 import {
-    setSortingSettings as setReviewerlistSortingSettings
+    setSearchSettings as setReviewerlistSearchSettings,
+    setSortingSettings as setReviewerlistSortingSettings,
+    setCurretPage as setReviewerlistCurretPage
 } from './reviewerListReducer';
 
 const initialState = {};
@@ -46,6 +48,10 @@ export const updateCurretPage = (val) => {
             case 'genreList':
 
                 dispatch(setGenrelistCurretPage({ page: val.page }));
+                break;
+
+            case 'reviewerList':
+                dispatch(setReviewerlistCurretPage({ page: val.page }));
                 break;
 
         }
@@ -84,6 +90,10 @@ export const updateSearchSetting = (val) => {
             case 'genreList':
 
                 dispatch(setGenrelistSearchSettings({ str: val.str }));
+                break;
+
+            case 'reviewerList':
+                dispatch(setReviewerlistSearchSettings({ str: val.str }));
                 break;
 
         }
