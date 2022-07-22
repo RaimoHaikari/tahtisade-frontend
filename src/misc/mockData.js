@@ -1,3 +1,385 @@
+export const ReviewerListData = [
+    {
+        "id": "aa",
+        "name": "Atte Alhainen",
+        "starsAverage": 3,
+        "numbOfRevies": 4
+    },
+    {
+        "id": "akiLehti",
+        "name": "Aki Lehti",
+        "starsAverage": 2.9375,
+        "numbOfRevies": 8
+    },
+    {
+        "id": "aleksiLeskinen",
+        "name": "Aleksi Leskinen",
+        "starsAverage": 2,
+        "numbOfRevies": 1
+    },
+    {
+        "id": "anneVälinoro",
+        "name": "Anne Välinoro",
+        "starsAverage": 4.16667,
+        "numbOfRevies": 3
+    },
+    {
+        "id": "anttiSelkokari",
+        "name": "Antti Selkokari",
+        "starsAverage": 3.45,
+        "numbOfRevies": 10
+    },
+    {
+        "id": "avola",
+        "name": "Pertti Avola",
+        "starsAverage": 2.92308,
+        "numbOfRevies": 13
+    },
+    {
+        "id": "axelÅhman",
+        "name": "Axel Åhman",
+        "starsAverage": 1,
+        "numbOfRevies": 1
+    },
+    {
+        "id": "eijaNiskanen",
+        "name": "Eija Niskanen",
+        "starsAverage": 3.875,
+        "numbOfRevies": 4
+    },
+    {
+        "id": "ek",
+        "name": "E K",
+        "starsAverage": 4,
+        "numbOfRevies": 1
+    },
+    {
+        "id": "hannaHyväri",
+        "name": "Hanna Hyväri",
+        "starsAverage": 3,
+        "numbOfRevies": 1
+    },
+    {
+        "id": "hannuBjörkbacka",
+        "name": "Hannu Björkbacka",
+        "starsAverage": 3,
+        "numbOfRevies": 11
+    },
+    {
+        "id": "hannuLiekso",
+        "name": "Hannu Liekso",
+        "starsAverage": 2.66667,
+        "numbOfRevies": 3
+    },
+    {
+        "id": "heikkiIkonen",
+        "name": "Heikki Ikonen",
+        "starsAverage": 3.36364,
+        "numbOfRevies": 11
+    },
+    {
+        "id": "heini lehtosalo",
+        "name": "Heini Lehtosalo",
+        "starsAverage": 4,
+        "numbOfRevies": 3
+    },
+    {
+        "id": "helinäLaajalahti",
+        "name": "Helinä Laajalahti",
+        "starsAverage": 2.91667,
+        "numbOfRevies": 6
+    },
+    {
+        "id": "hemanus",
+        "name": "Hemanus",
+        "starsAverage": 4,
+        "numbOfRevies": 1
+    },
+    {
+        "id": "hwRehnstöm",
+        "name": "Henri Waltter Rehnström",
+        "starsAverage": 2.8,
+        "numbOfRevies": 10
+    },
+    {
+        "id": "iidaSimes",
+        "name": "Iida Simes",
+        "starsAverage": 3.66667,
+        "numbOfRevies": 3
+    },
+    {
+        "id": "janneKaakko",
+        "name": "Janne Kaakko",
+        "starsAverage": 3.25,
+        "numbOfRevies": 8
+    },
+    {
+        "id": "jarnoLindemark",
+        "name": "Jarno Lindemark",
+        "starsAverage": 3.33333,
+        "numbOfRevies": 9
+    },
+    {
+        "id": "jesseRaatikainen",
+        "name": "Jesse Raatikainen",
+        "starsAverage": 3.66667,
+        "numbOfRevies": 3
+    },
+    {
+        "id": "jessicaPoikkijoki",
+        "name": "Jessica Poikkijoki",
+        "starsAverage": 3,
+        "numbOfRevies": 1
+    },
+    {
+        "id": "jouniVikman",
+        "name": "Jouni Vikman",
+        "starsAverage": 3.44444,
+        "numbOfRevies": 9
+    },
+    {
+        "id": "juhoTyppo",
+        "name": "Juho Typpö",
+        "starsAverage": 2.83333,
+        "numbOfRevies": 6
+    },
+    {
+        "id": "jussiAhlroot",
+        "name": "Jussi Ahlroot",
+        "starsAverage": 4,
+        "numbOfRevies": 1
+    },
+    {
+        "id": "jussiHuhtala",
+        "name": "Jussi Huhtala",
+        "starsAverage": 3.5,
+        "numbOfRevies": 6
+    },
+    {
+        "id": "jussiUPellonpää",
+        "name": "Jussi U. Pellonpää",
+        "starsAverage": 3.06667,
+        "numbOfRevies": 15
+    },
+    {
+        "id": "jussiVirratvuori",
+        "name": "Jussi Virratvuori",
+        "starsAverage": 3.7,
+        "numbOfRevies": 10
+    },
+    {
+        "id": "kaarinaLehtisalo",
+        "name": "Kaarina Lehtisalo",
+        "starsAverage": 2.7,
+        "numbOfRevies": 5
+    },
+    {
+        "id": "kaisuTervonen",
+        "name": "Kaisu Tervonen",
+        "starsAverage": 3,
+        "numbOfRevies": 1
+    },
+    {
+        "id": "kalleKinnunen",
+        "name": "Kalle Kinnunen",
+        "starsAverage": 3.14286,
+        "numbOfRevies": 7
+    },
+    {
+        "id": "kariSalminen",
+        "name": "Kari Salminen",
+        "starsAverage": 3.0625,
+        "numbOfRevies": 16
+    },
+    {
+        "id": "klasFransberg",
+        "name": "Klas Fransberg",
+        "starsAverage": 3,
+        "numbOfRevies": 2
+    },
+    {
+        "id": "kristerUggedal",
+        "name": "Krister Uggedal",
+        "starsAverage": 4,
+        "numbOfRevies": 1
+    },
+    {
+        "id": "kristerUggedal",
+        "name": "Krister Uggeldahl",
+        "starsAverage": 2.83333,
+        "numbOfRevies": 18
+    },
+    {
+        "id": "lauraHallamaa",
+        "name": "Laura Hallamaa",
+        "starsAverage": 2,
+        "numbOfRevies": 1
+    },
+    {
+        "id": "leenaVirtanen",
+        "name": "Leena Virtanen",
+        "starsAverage": 3,
+        "numbOfRevies": 4
+    },
+    {
+        "id": "mariaLättilä",
+        "name": "Maria Lättilä",
+        "starsAverage": 2.88889,
+        "numbOfRevies": 9
+    },
+    {
+        "id": "martaBalaga",
+        "name": "Marta Balaga",
+        "starsAverage": 2.75,
+        "numbOfRevies": 4
+    },
+    {
+        "id": "martinaMolisMelberg",
+        "name": "Martina Moliis-Mellberg",
+        "starsAverage": 2.75,
+        "numbOfRevies": 8
+    },
+    {
+        "id": "marttaKaukonen",
+        "name": "Martta Kaukonen",
+        "starsAverage": 3.30556,
+        "numbOfRevies": 18
+    },
+    {
+        "id": "miiaVistilä",
+        "name": "Mia Vistilä",
+        "starsAverage": 4,
+        "numbOfRevies": 1
+    },
+    {
+        "id": "miskaRantanen",
+        "name": "Miska Rantanen",
+        "starsAverage": 3.33333,
+        "numbOfRevies": 3
+    },
+    {
+        "id": "niinaHolm",
+        "name": "Niina Holm",
+        "starsAverage": 5,
+        "numbOfRevies": 1
+    },
+    {
+        "id": "niklasTirkkonen",
+        "name": "Niklas Tirkkonen",
+        "starsAverage": 2,
+        "numbOfRevies": 1
+    },
+    {
+        "id": "nikoIkonen",
+        "name": "Niko Ikonen",
+        "starsAverage": 2.8,
+        "numbOfRevies": 10
+    },
+    {
+        "id": "olli-mattiOinonen",
+        "name": "Olli-Matti Oinonen",
+        "starsAverage": 5,
+        "numbOfRevies": 1
+    },
+    {
+        "id": "päiviValotie",
+        "name": "Päivi Valotie",
+        "starsAverage": 2.73333,
+        "numbOfRevies": 15
+    },
+    {
+        "id": "pekkaEronen",
+        "name": "Pekka Eronen",
+        "starsAverage": 3,
+        "numbOfRevies": 9
+    },
+    {
+        "id": "riikkaOksanen",
+        "name": "Riikka Oksanen",
+        "starsAverage": 3.66667,
+        "numbOfRevies": 3
+    },
+    {
+        "id": "riittaLehtimäki",
+        "name": "Riitta Lehtimäki",
+        "starsAverage": 4.8,
+        "numbOfRevies": 5
+    },
+    {
+        "id": "ristoOjanen",
+        "name": "Risto Ojanen",
+        "starsAverage": 4,
+        "numbOfRevies": 1
+    },
+    {
+        "id": "sannaWirratvuori",
+        "name": "Sanna Wirtavuori",
+        "starsAverage": 4,
+        "numbOfRevies": 4
+    },
+    {
+        "id": "saraEH",
+        "name": "Sara Ehnholm Hielm",
+        "starsAverage": 3.66667,
+        "numbOfRevies": 6
+    },
+    {
+        "id": "sebastianGranskog",
+        "name": "Sebastian Granskog",
+        "starsAverage": 4.5,
+        "numbOfRevies": 2
+    },
+    {
+        "id": "susannaKarhapää",
+        "name": "Susanna Karhapää",
+        "starsAverage": 2,
+        "numbOfRevies": 1
+    },
+    {
+        "id": "timoAlho",
+        "name": "Timo Alho",
+        "starsAverage": 3.33333,
+        "numbOfRevies": 12
+    },
+    {
+        "id": "tr",
+        "name": "T R",
+        "starsAverage": 3.25,
+        "numbOfRevies": 4
+    },
+    {
+        "id": "tuomasRantanen",
+        "name": "Tuomas Rantanen",
+        "starsAverage": 4,
+        "numbOfRevies": 2
+    },
+    {
+        "id": "tuomoYrittiaho",
+        "name": "Tuomo Yrittiaho",
+        "starsAverage": 2.5,
+        "numbOfRevies": 4
+    },
+    {
+        "id": "tuukkaHämäläinen",
+        "name": "Tuukka Hämäläinen",
+        "starsAverage": 4.25,
+        "numbOfRevies": 2
+    },
+    {
+        "id": "valeriMörttinen",
+        "name": "Valtteri Mörttinen",
+        "starsAverage": 4,
+        "numbOfRevies": 2
+    },
+    {
+        "id": "vpLehtonen",
+        "name": "Veli-Pekka Lehtonen",
+        "starsAverage": 3.5,
+        "numbOfRevies": 2
+    }
+];
+
+
 export const SelectedGenreData = [
     {
         "id": "tyhja",

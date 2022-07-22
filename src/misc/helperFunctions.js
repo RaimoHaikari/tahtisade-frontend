@@ -3,6 +3,11 @@ import {
   SiLastpass
 } from "react-icons/si";
 
+import {
+    BsFillStarFill,
+    BsStarHalf
+} from "react-icons/bs"
+
 /*
  * Keskiarvon laskeva funktio
  *
@@ -12,6 +17,47 @@ import {
  * - https://stackoverflow.com/questions/10359907/how-to-compute-the-sum-and-average-of-elements-in-an-array
  */
 export const average = arr => arr.reduce( (p, c ) => p + c, 0 ) / arr.length;
+
+/*
+ * 
+ * Kuinka float -tyyppinen keskiarvo koodatan tähdiksi.
+ * 
+ * Muunnos on kaksivaiheinen.
+ * 1) koodataan apusarakkeeseen tähtimuotoinen esitys
+ * 2) Koska esillä olevan aineiston lajittelu pitää hoitaa alkuperäisen numeroarvon avulla,
+ *    vasta lopussa tähdet kopioidaan selaimelle lähtettävään kopioon alkuperäisen 
+ *    luvun tilalle.
+ * 
+ */
+export const convertAverageToStars = (avg) => {
+
+    let val = [];
+
+    for(let i = 0; i < Math.floor(avg); i ++)
+        val.push(<BsFillStarFill />);
+
+    if(avg % 1 >= 0.5)
+        val.push(<BsStarHalf />);
+
+    return val;
+}
+
+
+/*
+ * Selaimelle lähetettävän setin viimeistely, jossa numero korvataan tähdillä.
+ * (Prosessin vaihe2)
+ */
+export const displayStars = (list, key, value) => {
+
+    return list.map(item => {
+        return {
+            ...item,
+            [key]: item[value]
+        }
+    })
+
+}
+
 
 /*
  * Montako sivua tarvitaan, että kaikki objektit saadaa esitettyä, kun yhdelle sivulle 
@@ -145,6 +191,63 @@ export const getPaginationLinks = (currentPage, maxNumberOfPaginationLinks, tota
 
 
     return indexes
+}
+
+
+/*
+ * Suodatuksen yleisversio
+ * 
+ * - haku kohdistuu ainoastaan nimeen
+ */
+export const getPresentedItemsList = (allTheItems, search ,sortingField, sortingOrder) => {
+
+    let computedItems = allTheItems;
+
+    /*
+     * Haku
+     * - kohdistuu nimeen
+     */
+    if(search) {
+
+        computedItems = computedItems.filter(item => {
+
+            return (
+                item.name.toLowerCase().includes(search.toLowerCase()) 
+            )
+
+        })
+
+    }
+
+    /*
+     * Lajittelu
+     */
+    if(sortingField){
+        const reversed = sortingOrder === "asc" ? 1 : -1;
+
+        // Immer ei tykkää sort -funktion käytöstä....
+        let shallowCopy = computedItems.slice();
+
+        shallowCopy.sort((a,b) => {
+
+            let val;
+
+            switch (sortingField) {
+                case "name":
+                  val = reversed * a[sortingField].localeCompare(b[sortingField])
+                  break;
+                default:
+                    val =  reversed * ((a[sortingField] > b[sortingField]) ? 1 : (a[sortingField] < b[sortingField]) ? -1 : 0)
+              }
+
+            return(val)
+        })
+
+        computedItems = shallowCopy
+
+    }
+
+    return computedItems;    
 }
 
 /*

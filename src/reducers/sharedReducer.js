@@ -14,6 +14,10 @@ import {
     setCurretPage as setGenrelistCurretPage
 } from './genreListReducer';
 
+import {
+    setSortingSettings as setReviewerlistSortingSettings
+} from './reviewerListReducer';
+
 const initialState = {};
 
 const sharedSlice = createSlice({
@@ -54,27 +58,9 @@ export const updateDisplayType = (val) => {
 
         switch(val.store){
             
-            case 'genres': 
-
-            dispatch({
-                type: 'GENRELIST_SET_DISPLAY_TYPE',
-                data: {type: val.type}
-            });
-
-                break;
-
             case 'movieList': 
 
                 dispatch(setDisplayType({type: val.type}));
-                break;
-
-            case 'reviewers': 
-                
-                dispatch({
-                    type: 'REVIEWERLIST_SET_DISPLAY_TYPE',
-                    data: {type: val.type}
-                });
-
                 break;
         }
     }
@@ -116,6 +102,9 @@ export const updateSortingSetting = (val) => {
                 break;
             case 'genreList':
                 dispatch(setGenrelistSortingSettings({field: val.field}));
+                break;
+            case 'reviewerList':
+                dispatch(setReviewerlistSortingSettings({field: val.field}));
                 break;
 
         }

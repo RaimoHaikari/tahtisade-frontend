@@ -46,8 +46,6 @@ const GeneralTable = ({ store }) => {
      */
     const rowCliked = (d) => {
 
-        console.log("d", d);
-
         if(d.productPage)
             navigate(d.productPage);
         

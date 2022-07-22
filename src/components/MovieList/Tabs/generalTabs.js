@@ -40,6 +40,8 @@ const GeneralTabs = ({ store }) => {
                 return <Card key={`${i}-card`} />
             case 'GENRELIST_TABLE':
                 return <GeneralTable key={`${i}-tbl`} store='genreList' />
+            case 'REVIEWERLIST_TABLE':
+                return <GeneralTable key={`${i}-tbl`} store='reviewerList' />
 
           }
 
