@@ -6,6 +6,7 @@ import singleMovieReducer from './reducers/singleMovieReducer';
 import genreListReducer from './reducers/genreListReducer';
 import singleGenreReducer from './reducers/singleGenreReducer';
 import reviewerListReducer from './reducers/reviewerListReducer';
+import singleReviewerReducer from './reducers/singleReviewerReducer';
 
 const store = configureStore({
     reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
         movieList: movieListReducer,
         singleMovie: singleMovieReducer,
         reviewerList: reviewerListReducer,
+        singleReviewer: singleReviewerReducer,
         shared: sharedReducer
     }
 });

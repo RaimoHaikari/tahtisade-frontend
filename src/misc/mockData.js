@@ -1,3 +1,556 @@
+export const CollequeData = [
+    {
+        "criticID": "avola",
+        "googleID": "5",
+        "stars": 4
+    },
+    {
+        "criticID": "avola",
+        "googleID": "6",
+        "stars": 3
+    },
+    {
+        "criticID": "avola",
+        "googleID": "20",
+        "stars": 3
+    },
+    {
+        "criticID": "avola",
+        "googleID": "24",
+        "stars": 3
+    },
+    {
+        "criticID": "avola",
+        "googleID": "32",
+        "stars": 3
+    },
+    {
+        "criticID": "avola",
+        "googleID": "34",
+        "stars": 2
+    },
+    {
+        "criticID": "avola",
+        "googleID": "45",
+        "stars": 2
+    }
+]
+
+export const SingleReviewerData = {
+    "reviewerData": [
+        {
+            "id": "kristerUggedal",
+            "name": "Krister Uggeldahl"
+        },
+        {
+            "id": "kristerUggedal",
+            "name": "Krister Uggedal"
+        }
+    ],
+    "reviews": [
+        {
+            "criticID": "kristerUggedal",
+            "googleID": "1",
+            "stars": 3,
+            "link": "Hufvudstadsbladet 6.3.2020",
+            "publisher": "Hufvudstadsbladet",
+            "name": "Krister Uggeldahl",
+            "elokuvanNimi": "Elämää kuoleman jälkeen"
+        },
+        {
+            "criticID": "kristerUggedal",
+            "googleID": "5",
+            "stars": 2,
+            "link": "Hufvudstadsbladet 7.2.2020",
+            "publisher": "Hufvudstadsbladet",
+            "name": "Krister Uggeldahl",
+            "elokuvanNimi": "A Hidden Life"
+        },
+        {
+            "criticID": "kristerUggedal",
+            "googleID": "6",
+            "stars": 3,
+            "link": "Hufvudstadsbladet 13.3.2020",
+            "publisher": "Hufvudstadsbladet",
+            "name": "Krister Uggeldahl",
+            "elokuvanNimi": "La Belle Époque"
+        },
+        {
+            "criticID": "kristerUggedal",
+            "googleID": "12",
+            "stars": 4,
+            "link": "Hufvudstadsbladet 6.3.2020",
+            "publisher": "Hufvudstadsbladet",
+            "name": "Krister Uggeldahl",
+            "elokuvanNimi": "Les Misérables"
+        },
+        {
+            "criticID": "kristerUggedal",
+            "googleID": "15",
+            "stars": 5,
+            "link": "Hufvudstadsbladet 24.1.2020",
+            "publisher": "Hufvudstadsbladet",
+            "name": "Krister Uggeldahl",
+            "elokuvanNimi": "Taistelulähetit - 1917"
+        },
+        {
+            "criticID": "kristerUggedal",
+            "googleID": "17",
+            "stars": 3,
+            "link": "Hufvudstadsbladet 24.1.2020",
+            "publisher": "Hufvudstadsbladet",
+            "name": "Krister Uggeldahl",
+            "elokuvanNimi": "Just Mercy"
+        },
+        {
+            "criticID": "kristerUggedal",
+            "googleID": "19",
+            "stars": 1,
+            "link": "Hufvudstadsbladet 3.1.2020",
+            "publisher": "Hufvudstadsbladet",
+            "name": "Krister Uggeldahl",
+            "elokuvanNimi": "Cats (2019)"
+        },
+        {
+            "criticID": "kristerUggedal",
+            "googleID": "20",
+            "stars": 3,
+            "link": "Hufvudstadsbladet 14.2.2020",
+            "publisher": "Hufvudstadsbladet",
+            "name": "Krister Uggeldahl",
+            "elokuvanNimi": "The Peanut Butter Falcon"
+        },
+        {
+            "criticID": "kristerUggedal",
+            "googleID": "21",
+            "stars": 3,
+            "link": "Hufvudstadsbladet 14.2.2020",
+            "publisher": "Hufvudstadsbladet",
+            "name": "Krister Uggeldahl",
+            "elokuvanNimi": "Heinähattu, Vilttitossu ja ärhäkkä koululainen"
+        },
+        {
+            "criticID": "kristerUggedal",
+            "googleID": "24",
+            "stars": 4,
+            "link": "Hufvudstadsbladet 3.1.2020",
+            "publisher": "Hufvudstadsbladet",
+            "name": "Krister Uggeldahl",
+            "elokuvanNimi": "Lasse - Best Man"
+        },
+        {
+            "criticID": "kristerUggedal",
+            "googleID": "25",
+            "stars": 2,
+            "link": "Hufvudstadsbladet 3.1.2020",
+            "publisher": "Hufvudstadsbladet",
+            "name": "Krister Uggeldahl",
+            "elokuvanNimi": "Teräsleidit"
+        },
+        {
+            "criticID": "kristerUggedal",
+            "googleID": "27",
+            "stars": 3,
+            "link": "Hufvudstadsbladet 6.3.2020",
+            "publisher": "Hufvudstadsbladet",
+            "name": "Krister Uggeldahl",
+            "elokuvanNimi": "Eteenpäin"
+        },
+        {
+            "criticID": "kristerUggedal",
+            "googleID": "30",
+            "stars": 2,
+            "link": "Hufvudstadsbladet 21.2.2020",
+            "publisher": "Hufvudstadsbladet",
+            "name": "Krister Uggeldahl",
+            "elokuvanNimi": "Koiranpäivät"
+        },
+        {
+            "criticID": "kristerUggedal",
+            "googleID": "32",
+            "stars": 3,
+            "link": "Hufvudstadsbladet 28.2.2020",
+            "publisher": "Hufvudstadsbladet",
+            "name": "Krister Uggeldahl",
+            "elokuvanNimi": "Erämaan kutsu"
+        },
+        {
+            "criticID": "kristerUggedal",
+            "googleID": "34",
+            "stars": 3,
+            "link": "Hufvudstadsbladet 28.2.2020",
+            "publisher": "Hufvudstadsbladet",
+            "name": "Krister Uggeldahl",
+            "elokuvanNimi": "The Invisible Man"
+        },
+        {
+            "criticID": "kristerUggedal",
+            "googleID": "35",
+            "stars": 4,
+            "link": "Hufvudstadsbladet 28.2.2020",
+            "publisher": "Hufvudstadsbladet",
+            "name": "Krister Uggeldahl",
+            "elokuvanNimi": "The Specials"
+        },
+        {
+            "criticID": "kristerUggedal",
+            "googleID": "40",
+            "stars": 1,
+            "link": "Hufvudstadsbladet 17.1.2020",
+            "publisher": "Hufvudstadsbladet",
+            "name": "Krister Uggeldahl",
+            "elokuvanNimi": "Bad Boys for Life"
+        },
+        {
+            "criticID": "kristerUggedal",
+            "googleID": "44",
+            "stars": 4,
+            "link": "Hufvudstadsbladet 21.8.2020",
+            "publisher": "Hufvudstadsbladet",
+            "name": "Krister Uggedal",
+            "elokuvanNimi": "Neiti Aika"
+        },
+        {
+            "criticID": "kristerUggedal",
+            "googleID": "45",
+            "stars": 2,
+            "link": "Hufvudstadsbladet 17.1.2020",
+            "publisher": "Hufvudstadsbladet",
+            "name": "Krister Uggeldahl",
+            "elokuvanNimi": "Dolittle"
+        }
+    ],
+    "defCompSet": [
+        {
+            "googleID": "1",
+            "count": 7,
+            "stars": 3.42857
+        },
+        {
+            "googleID": "5",
+            "count": 8,
+            "stars": 3.875
+        },
+        {
+            "googleID": "6",
+            "count": 6,
+            "stars": 3.41667
+        },
+        {
+            "googleID": "12",
+            "count": 8,
+            "stars": 3.75
+        },
+        {
+            "googleID": "15",
+            "count": 13,
+            "stars": 3.88462
+        },
+        {
+            "googleID": "17",
+            "count": 7,
+            "stars": 3
+        },
+        {
+            "googleID": "19",
+            "count": 10,
+            "stars": 2.3
+        },
+        {
+            "googleID": "20",
+            "count": 7,
+            "stars": 3.5
+        },
+        {
+            "googleID": "21",
+            "count": 6,
+            "stars": 3
+        },
+        {
+            "googleID": "24",
+            "count": 3,
+            "stars": 2.66667
+        },
+        {
+            "googleID": "25",
+            "count": 10,
+            "stars": 2.8
+        },
+        {
+            "googleID": "27",
+            "count": 2,
+            "stars": 3.25
+        },
+        {
+            "googleID": "30",
+            "count": 3,
+            "stars": 1.66667
+        },
+        {
+            "googleID": "32",
+            "count": 6,
+            "stars": 2.83333
+        },
+        {
+            "googleID": "34",
+            "count": 7,
+            "stars": 3.42857
+        },
+        {
+            "googleID": "35",
+            "count": 4,
+            "stars": 3.25
+        },
+        {
+            "googleID": "40",
+            "count": 9,
+            "stars": 2.44444
+        },
+        {
+            "googleID": "44",
+            "count": 7,
+            "stars": 3.85714
+        },
+        {
+            "googleID": "45",
+            "count": 7,
+            "stars": 2
+        }
+    ],
+    "reviewerWithShardItems": [
+        {
+            "id": "akiLehti",
+            "count": 5,
+            "name": "Aki Lehti"
+        },
+        {
+            "id": "anneVälinoro",
+            "count": 3,
+            "name": "Anne Välinoro"
+        },
+        {
+            "id": "anttiSelkokari",
+            "count": 5,
+            "name": "Antti Selkokari"
+        },
+        {
+            "id": "avola",
+            "count": 7,
+            "name": "Pertti Avola"
+        },
+        {
+            "id": "axelÅhman",
+            "count": 1,
+            "name": "Axel Åhman"
+        },
+        {
+            "id": "eijaNiskanen",
+            "count": 1,
+            "name": "Eija Niskanen"
+        },
+        {
+            "id": "hannuBjörkbacka",
+            "count": 6,
+            "name": "Hannu Björkbacka"
+        },
+        {
+            "id": "heikkiIkonen",
+            "count": 3,
+            "name": "Heikki Ikonen"
+        },
+        {
+            "id": "heini lehtosalo",
+            "count": 1,
+            "name": "Heini Lehtosalo"
+        },
+        {
+            "id": "helinäLaajalahti",
+            "count": 2,
+            "name": "Helinä Laajalahti"
+        },
+        {
+            "id": "hemanus",
+            "count": 1,
+            "name": "Hemanus"
+        },
+        {
+            "id": "hwRehnstöm",
+            "count": 6,
+            "name": "Henri Waltter Rehnström"
+        },
+        {
+            "id": "iidaSimes",
+            "count": 1,
+            "name": "Iida Simes"
+        },
+        {
+            "id": "janneKaakko",
+            "count": 3,
+            "name": "Janne Kaakko"
+        },
+        {
+            "id": "jarnoLindemark",
+            "count": 5,
+            "name": "Jarno Lindemark"
+        },
+        {
+            "id": "jesseRaatikainen",
+            "count": 1,
+            "name": "Jesse Raatikainen"
+        },
+        {
+            "id": "jessicaPoikkijoki",
+            "count": 1,
+            "name": "Jessica Poikkijoki"
+        },
+        {
+            "id": "jouniVikman",
+            "count": 4,
+            "name": "Jouni Vikman"
+        },
+        {
+            "id": "juhoTyppo",
+            "count": 2,
+            "name": "Juho Typpö"
+        },
+        {
+            "id": "jussiAhlroot",
+            "count": 1,
+            "name": "Jussi Ahlroot"
+        },
+        {
+            "id": "jussiHuhtala",
+            "count": 3,
+            "name": "Jussi Huhtala"
+        },
+        {
+            "id": "jussiUPellonpää",
+            "count": 6,
+            "name": "Jussi U. Pellonpää"
+        },
+        {
+            "id": "jussiVirratvuori",
+            "count": 6,
+            "name": "Jussi Virratvuori"
+        },
+        {
+            "id": "kaarinaLehtisalo",
+            "count": 2,
+            "name": "Kaarina Lehtisalo"
+        },
+        {
+            "id": "kaisuTervonen",
+            "count": 1,
+            "name": "Kaisu Tervonen"
+        },
+        {
+            "id": "kalleKinnunen",
+            "count": 2,
+            "name": "Kalle Kinnunen"
+        },
+        {
+            "id": "kariSalminen",
+            "count": 3,
+            "name": "Kari Salminen"
+        },
+        {
+            "id": "klasFransberg",
+            "count": 1,
+            "name": "Klas Fransberg"
+        },
+        {
+            "id": "lauraHallamaa",
+            "count": 1,
+            "name": "Laura Hallamaa"
+        },
+        {
+            "id": "leenaVirtanen",
+            "count": 1,
+            "name": "Leena Virtanen"
+        },
+        {
+            "id": "mariaLättilä",
+            "count": 2,
+            "name": "Maria Lättilä"
+        },
+        {
+            "id": "martaBalaga",
+            "count": 3,
+            "name": "Marta Balaga"
+        },
+        {
+            "id": "marttaKaukonen",
+            "count": 6,
+            "name": "Martta Kaukonen"
+        },
+        {
+            "id": "miiaVistilä",
+            "count": 1,
+            "name": "Mia Vistilä"
+        },
+        {
+            "id": "miskaRantanen",
+            "count": 1,
+            "name": "Miska Rantanen"
+        },
+        {
+            "id": "niklasTirkkonen",
+            "count": 1,
+            "name": "Niklas Tirkkonen"
+        },
+        {
+            "id": "nikoIkonen",
+            "count": 4,
+            "name": "Niko Ikonen"
+        },
+        {
+            "id": "päiviValotie",
+            "count": 9,
+            "name": "Päivi Valotie"
+        },
+        {
+            "id": "pekkaEronen",
+            "count": 5,
+            "name": "Pekka Eronen"
+        },
+        {
+            "id": "riittaLehtimäki",
+            "count": 1,
+            "name": "Riitta Lehtimäki"
+        },
+        {
+            "id": "ristoOjanen",
+            "count": 1,
+            "name": "Risto Ojanen"
+        },
+        {
+            "id": "sannaWirratvuori",
+            "count": 2,
+            "name": "Sanna Wirtavuori"
+        },
+        {
+            "id": "timoAlho",
+            "count": 4,
+            "name": "Timo Alho"
+        },
+        {
+            "id": "tr",
+            "count": 2,
+            "name": "T R"
+        },
+        {
+            "id": "tuomoYrittiaho",
+            "count": 2,
+            "name": "Tuomo Yrittiaho"
+        },
+        {
+            "id": "vpLehtonen",
+            "count": 1,
+            "name": "Veli-Pekka Lehtonen"
+        }
+    ]
+}
+
 export const ReviewerListData = [
     {
         "id": "aa",

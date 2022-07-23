@@ -20,6 +20,11 @@ import {
     setCurretPage as setReviewerlistCurretPage
 } from './reviewerListReducer';
 
+import {
+    setSearchSettings as setSingleReviewerSearchSettings,
+    setSortingSettings as setSingleReviewerSortingSettings,
+} from './singleReviewerReducer';
+
 const initialState = {};
 
 const sharedSlice = createSlice({
@@ -96,6 +101,10 @@ export const updateSearchSetting = (val) => {
                 dispatch(setReviewerlistSearchSettings({ str: val.str }));
                 break;
 
+            case 'singleReviewer':
+                dispatch(setSingleReviewerSearchSettings({ str: val.str }));
+                break;
+
         }
     }
 }
@@ -115,6 +124,9 @@ export const updateSortingSetting = (val) => {
                 break;
             case 'reviewerList':
                 dispatch(setReviewerlistSortingSettings({field: val.field}));
+                break;
+            case 'singleReviewer':
+                dispatch(setSingleReviewerSortingSettings({field: val.field}));
                 break;
 
         }

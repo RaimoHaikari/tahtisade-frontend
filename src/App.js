@@ -10,6 +10,7 @@ import FrontPage from "./pages/FrontPage";
 import Movies from "./pages/Movies";
 import Movie from "./pages/Movie";
 import Critics from "./pages/Critics";
+import Critic from "./pages/Critic";
 import Genres from "./pages/Genres";
 import Genre from "./pages/Genre";
 import Login from "./pages/Login";
@@ -49,6 +50,7 @@ const App = () => {
         <Routes>
           <Route path="/genret/:id" element={<Genre />} />
           <Route path="/genret" element={<Genres />} />
+          <Route path="/kriitikot/:id" element={<Critic />} />
           <Route path="/kriitikot" element={<Critics />} />
           <Route path="/elokuvat/:id" element={<Movie />} />
           <Route path="/elokuvat" element={<Movies />} />

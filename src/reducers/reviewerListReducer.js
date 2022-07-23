@@ -64,7 +64,7 @@ const displayReviewerList = (state, reviewers) => {
      */
     loadedReviewerList = loadedReviewerList.map(r => {
 
-        let productPage = `reviewers/${r.id}`;
+        let productPage = `/kriitikot/${r.id}`;
         let visualizedStars = convertAverageToStars(r['starsAverage']);
 
         if(parseInt(r.numbOfRevies) > maxNumbOfReviews)
