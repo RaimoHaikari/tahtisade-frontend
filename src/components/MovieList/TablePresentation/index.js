@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import parse from 'html-react-parser';
 
 import { updateSortingSetting } from '../../../reducers/sharedReducer';
+import { convertAverageToStars } from '../../../misc/helperFunctions';
 
 import { BiSortDown, BiSortUp } from 'react-icons/bi';
 
@@ -109,7 +110,7 @@ const TablePresentation = () => {
                                         : m.nimi
                                     }</TD>
                                 <TD before="Arvosteluja">{m.numberOfReviews}</TD>
-                                <TD before="Keskiarvo" >{m.averageOfReviews}</TD>
+                                <TD before="Keskiarvo" >{convertAverageToStars(m.averageOfReviews)}</TD>
                             </TR>
                         )
                     })

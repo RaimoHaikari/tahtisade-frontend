@@ -23,7 +23,6 @@ const Movies = () => {
 
     return (
         <Container>
-            <h2>Elokuvat</h2>
 
             <PaginationAndSearch>
                 <Pagination store="movieList" />

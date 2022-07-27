@@ -105,7 +105,7 @@ const GeneralTable = ({ store }) => {
                                                     {
                                                         search !== '' && header.searchable
                                                         ? emphasizeSearched(m[header.field])
-                                                        : header.field === 'starsAverage'
+                                                        : (header.field === 'starsAverage' || header.field === 'compStars')
                                                             ? convertAverageToStars(m[header.field])
                                                             : m[header.field]
                                                     }

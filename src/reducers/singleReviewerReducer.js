@@ -81,7 +81,7 @@ const displayReviewerData = (state, data ) => {
         return {
             googleID: c.googleID,
             count: c.count,
-            stars: c.starsAverage
+            starsAverage: c.starsAverage
         }
     })
 
@@ -95,7 +95,7 @@ const displayReviewerData = (state, data ) => {
             link: r.link,
             name: criticName,
             publisher: r.publisher,
-            stars: r.stars
+            starsAverage: r.stars
         }
     });
 
@@ -202,7 +202,7 @@ const getActiveCompData = (id, compset) => {
 const getHeaders = () => {
     return [
         { name: "Nimi", field: "elokuvanNimi", sortable: true, searchable: false},
-        { name: "Tähtiä", field: "stars", sortable: true, searchable: false},
+        { name: "Tähtiä", field: "starsAverage", sortable: true, searchable: false},
         { name: "Lähde", field: "link", sortable: false, searchable: false},
         { name: "Vertailu", field: "compStars", sortable: true, searchable: false},
     ];
@@ -238,7 +238,7 @@ const getPresentedReviewsList = (allTheReviews, searchStr, sortingField, sorting
 
             return {
                 ...r,
-                compStars: round(found[0].stars,0)
+                compStars: round(found[0].starsAverage,0)
             }
         })
 
@@ -321,7 +321,7 @@ const getShares = (visibleData, zoomed =  false) => {
         let filmId = element.googleID;
                 
         let compGrade = element.compStars;
-        let actGrade = element.stars;
+        let actGrade = element.starsAverage;
         
         //compGrade = Math.floor(compGrade) + Math.ceil(compGrade % 1)/2;
         //actGrade = Math.floor(actGrade) +  Math.ceil(actGrade % 1)/2;
@@ -613,9 +613,24 @@ const updateComparedColleaque = (state, data, compId) => {
 
     let newCompId = compId;                 // - vertailuun valitun kriitikon id-tunnus
 
-    let loadedCompReviews = data !== null
-                            ? data.collequeReviews           // - kriitikon antamat arvosanat, mikäli ne luettiin palvelimelta
-                            : null;
+    let loadedCompReviews = null;
+
+    /*
+     * @todo: Päivitä palvelimen palaluttama kentännimi stars -> starsAverage, jotta
+     *        ei turhaan tarvi käydä listaa läpi
+     */
+    if(data !== null){
+
+        loadedCompReviews = data.collequeReviews.map(r => {
+
+            return {
+                criticID: r.criticID, 
+                googleID: r.googleID, 
+                starsAverage: r.stars
+            }
+        })
+
+    }
 
     let newCompset = state.compset;         // - aiemmin tiedossa olevat muiden antamat arvosanat
 
