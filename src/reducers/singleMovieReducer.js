@@ -7,11 +7,16 @@ import movieService from '../services/movies';
 
 
 import ComponentService from '../components/SingleMovie/ReviewsTable';
-import { posterUrl,validURL } from '../misc/helperFunctions';
+import { 
+    getPresentedItemsList,
+    posterUrl,
+    validURL 
+} from '../misc/helperFunctions';
 
 const initialState = {
     data: null,
     headers: [],
+    search: '',
     sortingField: '',
     sortingOrder: '',
     visibleData: null,
@@ -43,7 +48,7 @@ const getHeaders = () => {
     return [
         { name: "Nimi", field: "name", sortable: true, searchable: false},
         { name: "Lähde", field: "link", sortable: false, searchable: false},
-        { name: "Tähtiä", field: "stars", sortable: true, searchable: false}
+        { name: "Tähtiä", field: "starsAverage", sortable: true, searchable: false}
     ];
 }
 
@@ -89,22 +94,39 @@ const getVisibleData = (data) => {
 
     let newData = data.map(d => {
 
-        //let newName = <Title>{d.name}</Title>
         let newLink = validURL(d.link)
             ? ComponentService.getSourceLink(d.publisher, d.link)
             : d.link;
 
-        let newStars = ComponentService.visualizeStars(d.stars)
-
         return {
             ...d,
             link: newLink,
-            stars: newStars
+            starsAverage: d.stars
         }
     });
 
 
     return newData;
+}
+
+const updateSortingSettings = (state, field)  => {
+
+    let newField = field;
+    let newOrder = ((newField === state.sortingField) && (state.sortingOrder === "asc")) ? "desc" : "asc";
+
+    let sortedReviewsList = getPresentedItemsList(
+        state.visibleData,
+        state.search,
+        newField,
+        newOrder
+    );
+
+    return {
+        ...state,
+        sortingField: newField,
+        sortingOrder: newOrder,
+        visibleData: sortedReviewsList
+    }
 }
 
 
@@ -123,12 +145,20 @@ const singleMovieSlice = createSlice({
             };
 
             return displayMovieData(state, data);
+        },
+        setSortingSettings(state, action){
+
+            const { field } = action.payload;
+
+            return updateSortingSettings(state, field);
+
         }
     }
 })
 
 export const {
-    fetchingMovie
+    fetchingMovie,
+    setSortingSettings
 } = singleMovieSlice.actions;
 
 export const initializeMovie = (val) => {

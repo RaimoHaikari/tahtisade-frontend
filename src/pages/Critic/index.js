@@ -13,8 +13,16 @@ import {
 
 import CountDown from "../../components/CountDown";
 import Reviews from "../../components/SingleReviewer";
+import Colleagues from '../../components/SingleReviewer/Colleagues';
+import ReusableD3Donut from "../../components/SingleReviewer/aReusableDonut";
+
+import Pagination from "../../components/MovieList/Pagination/GeneralPagination";
+import Search from '../../components/DT/Search';
+
+import Togglable from "../../components/GeneralLayout/Togglable";
 
 import { initializeReviewer } from "../../reducers/singleReviewerReducer";
+import { updateSearchSetting } from "../../reducers/sharedReducer";
 
 const Critic = () => {
 
@@ -25,11 +33,11 @@ const Critic = () => {
     const id = useParams().id;
 
     useEffect(() => {
-        dispatch(initializeReviewer(id));
-    }, [])
+        if(data === null)
+            dispatch(initializeReviewer(id));
+    }, [data])
 
-    console.log(data);
-
+    /*  <CountDown /> */
     return (
         <Container>
         {
@@ -40,16 +48,39 @@ const Critic = () => {
                 : <InfoCardWrapper>
 
                     <Aside>
-                        <div>TOGGLABLE</div>
+                        <Togglable
+                            buttonLabel="Vertailu"
+                            openAtStart={false}
+                        >
+                            <Colleagues />
+                        </Togglable>
                     </Aside>
 
                     <Main>
-                        <div>Pagination and search</div>
+
+                        <PaginationAndSearch>
+                            <Pagination store="singleReviewer" />
+                            <Search 
+                                onSearch={(val) => dispatch(
+                                    updateSearchSetting({
+                                        store: 'singleReviewer',
+                                        str: val
+                                    })
+                                )}
+                            />
+                        </PaginationAndSearch>
+
                         <Reviews />
+
                     </Main>
 
                     <Graph>
-                        <div>TOGGLABLE</div>
+                        <Togglable
+                            buttonLabel="Vertailu"
+                            openAtStart={true}
+                        >
+                            <ReusableD3Donut />
+                        </Togglable>
                     </Graph>
                 
                   </InfoCardWrapper>
@@ -58,5 +89,6 @@ const Critic = () => {
     );
 
 };
+
 
 export default Critic;

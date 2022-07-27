@@ -32,7 +32,7 @@ const ReviewerList = () => {
         <div>
             {
                 loading === true
-                ? <div>C.O.U.N.T.D.O.W.N</div>
+                ? <CountDown />
                 : visibleData === null
                     ? errorMsg()
                     : <GenreralTabs store="reviewerList" />

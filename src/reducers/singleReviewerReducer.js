@@ -8,6 +8,11 @@ import {
     round
 } from "../misc/helperFunctions";
 
+/*
+ * Yhteydet backEnd:iin
+ */
+import movieService from '../services/movies';
+
 import {
     SingleReviewerData,
     CollequeData
@@ -68,10 +73,39 @@ const initialState = {
  * Lähtötietojen asetus.
  * Talletetaan palvelimelta luetut, aktiivisen kriitikon tiedot.
  */
-const displayReviewerData = (state, data) => {
+const displayReviewerData = (state, data ) => {
 
-    let newData = data.reviews;
-    let newReviewerData = data.reviewerData[0];
+    const criticID = data.criticDetails.criticID;
+    const criticName = data.criticDetails.nimi;
+    const defCompSet = data.criticDetails.defCompSet.map(c => {
+        return {
+            googleID: c.googleID,
+            count: c.count,
+            stars: c.starsAverage
+        }
+    })
+
+
+    /* let newData = data.reviews; */
+    let newData = data.allReviews.map(r => {
+        return {
+            criticID: criticID,
+            elokuvanNimi: r.movie.nimi,
+            googleID: r.googleID,
+            link: r.link,
+            name: criticName,
+            publisher: r.publisher,
+            stars: r.stars
+        }
+    });
+
+
+    /* let newReviewerData = data.reviewerData[0]; */
+    let newReviewerData = {
+        id: criticID,
+        name: criticName
+    }
+
     
     /* 
      * Talletetaan vertailtavan kriitikon oletusarvo, jolloin vertailusarakkeesa näytetään mitä kaikki muut
@@ -83,13 +117,20 @@ const displayReviewerData = (state, data) => {
      * 
      */
     let newActiveCompId = DEFAULT_COMPSET_ID;
-    let newCompset = setupCompset(data);
 
-    let originalColleaquesList = [...data.reviewerWithShardItems];
+    let newCompset = setupCompset(defCompSet);
+
+    let originalColleaquesList = data.criticDetails.reviewerWithShardItems.map(c => {
+        return {
+            id: c.criticID,
+            count: c.count,
+            name: c.name
+        }
+    });
 
     let newColleaguesList = setupColleaguesList(
         newCompset, 
-        data.reviewerWithShardItems, 
+        originalColleaquesList, 
         Object.values(state.colleaguesListSortingOptions).filter(o => o.isActive)[0],
         state.colleaguesListSearchStr
     );
@@ -125,20 +166,21 @@ const displayReviewerData = (state, data) => {
    let newHeaders = updateHeaders(newColleaguesList, getHeaders());
 
    return {
-    ...state,
-    activeCompId: newActiveCompId,
-    colleaguesList: newColleaguesList,
-    compset: newCompset,
-    data: newData,
-    headers: newHeaders,
-    loading: false,
-    paginationLinks: paginationLinks,
-    originalColleaquesList: originalColleaquesList,
-    shares: newShares,
-    reviewerData: newReviewerData,
-    visibleData: visibleData
-};
+        ...state,
+        activeCompId: newActiveCompId,
+        colleaguesList: newColleaguesList,
+        compset: newCompset,
+        data: newData,
+        headers: newHeaders,
+        loading: false,
+        paginationLinks: paginationLinks,
+        originalColleaquesList: originalColleaquesList,
+        shares: newShares,
+        reviewerData: newReviewerData,
+        visibleData: visibleData
+    };
 }
+
 
 /*
  * Haetaan muiden kriitikkojen arvosteluita sisältävästä taulukosta vertailussa olevan
@@ -181,7 +223,7 @@ const getPresentedReviewsList = (allTheReviews, searchStr, sortingField, sorting
     if(compset !== null) {
 
         // - napataan vertailukriitikon arvostelemien elokuvien id-tunnukset
-        let ids = compset.reviews.map(r => r.googleID)
+        let ids = compset.reviews.map(r => r.googleID);
 
         // - karstitaan pois elokuvat, joite vertailussa oleva kriitikko ei ole arvostellut
         computedReviews = computedReviews
@@ -211,7 +253,9 @@ const getPresentedReviewsList = (allTheReviews, searchStr, sortingField, sorting
 
         // - karstitaan pois elokuvat, joite vertailussa oleva kriitikko ei ole arvostellut
         computedReviews = computedReviews
-            .filter(item => selected.ids.indexOf(item.googleID) !== -1)
+            .filter(item => {
+                return selected.ids.indexOf(item.googleID) !== -1
+            })
     }
 
     /*
@@ -319,9 +363,9 @@ const restorePassiveShares = (newShares, oldShares, active) => {
 /*
  * Hakutermin muutos, kun haku kohdistuu kriitikon arvostelemien elokuvien listaan
  */
-const setReviewsSearchSettings = (state, data) => {
+const setReviewsSearchSettings = (state, str) => {
 
-    let searchStr = data.str;
+    let searchStr = str;
 
     // - päivitetään kävijälle näytettävä elokuvalistaus
     let visibleData = getPresentedReviewsList(
@@ -333,20 +377,19 @@ const setReviewsSearchSettings = (state, data) => {
         state.selectedMovies
     );
 
-
-
     /* Jaotetellaan elokuvat sen perustella, kumpi antoi enemmän tähtiä (aktiivinen kriitikko vai vertailussa oleva) */
     /*
      * Mikäli grafiikasta on valittu tietty arvosanaryhmä (paremmat, huonommat, samat) päälle,
      * passiivisten ryhmien määrät pitää pysyä tallessa!
      */
-    let newShares = getShares(visibleData)
+    let newShares = getShares(visibleData);
 
     if(state.selectedMovies.lbl !== '')
-        newShares = restorePassiveShares(newShares, state.shares.shares, state.selectedMovies.lbl)
+        newShares = restorePassiveShares(newShares, state.shares.shares, state.selectedMovies.lbl);
 
     // lisätään tieto, että kyseessä on hakutermin muutos
-    newShares = wrapShares(newShares, true)
+    newShares = wrapShares(newShares, true);
+
 
     /*
      * Sivutukseen tarvittava tieto
@@ -445,9 +488,9 @@ const setupCompset = (data) => {
     compset.push(
         {
             id: DEFAULT_COMPSET_ID,
-            reviews: data.defCompSet
+            reviews: data
         }     
-    )
+    );
 
     return compset
 
@@ -494,21 +537,204 @@ const sortColleaguesList = (l, settings) => {
 /*
  * Vertailulistaan kohdistettava haku
  */
-const setColleaquesSearch = (state, data) => {
+const setColleaquesSearch = (state, str) => {
 
     let newColleaguesList = setupColleaguesList(
         state.compset, 
         state.originalColleaquesList, 
         Object.values(state.colleaguesListSortingOptions).filter(o => o.isActive)[0],
-        data.str
+        str
     )
 
     return {
         ...state,
         colleaguesList: newColleaguesList,
-        colleaguesListSearchStr: data.str
+        colleaguesListSearchStr: str
 
     }
+
+}
+
+
+/*
+ * Päivitetään (kriitikkojen)vertailulistan lajitteluperuste
+ */ 
+const setCollequeListSorting = (state, criteria) => {
+
+    /*
+     * Huom. Ompas yllättävän hankalaa objektin sywäkloonaus
+     */
+    let newColleaguesListSortingOptions = updateColleaqueListSorting(
+        criteria, 
+        JSON.parse(JSON.stringify(state.colleaguesListSortingOptions))
+    );
+
+    let newColleaguesList = setupColleaguesList(
+        state.compset, 
+        state.originalColleaquesList, 
+        Object.values(newColleaguesListSortingOptions).filter(o => o.isActive)[0],
+        state.colleaguesListSearchStr
+    )
+ 
+    return {
+        ...state,
+        colleaguesList: newColleaguesList,
+        colleaguesListSortingOptions: newColleaguesListSortingOptions
+    }
+}
+
+/*
+ * Päivitetään vertailulistan lajitteluvaihtoehdot
+ * 
+ * @param val: millä perusteella lista lajitellaan [byCount, byName]
+ */
+const updateColleaqueListSorting = (val, s) => {
+
+    let settings = {...s}
+
+    // eslint-disable-next-line no-unused-vars
+    for (const [k, v] of Object.entries(settings)) {
+
+        if(v.value === val)
+            v.isActive = true
+        else
+            v.isActive = false
+    }   
+
+    return settings
+
+}
+
+/*
+ * Päivitetään vertailtavana oleva kriitikko
+ * - mikäli palvelimelta on luettu uuden kriitikon tiedot, liitetään nämä vertailuaineistoon
+ */
+const updateComparedColleaque = (state, data, compId) => {
+
+    let newCompId = compId;                 // - vertailuun valitun kriitikon id-tunnus
+
+    let loadedCompReviews = data !== null
+                            ? data.collequeReviews           // - kriitikon antamat arvosanat, mikäli ne luettiin palvelimelta
+                            : null;
+
+    let newCompset = state.compset;         // - aiemmin tiedossa olevat muiden antamat arvosanat
+
+    /* Lisätään tarvittaessa luetut arvosanat muiden kriitikkojen antamiin arvosanojen taulukkoon */
+    if(loadedCompReviews !== null) {    
+
+        newCompset = newCompset.concat(
+            {
+                id: newCompId,
+                reviews: loadedCompReviews
+            }            
+        )
+
+    };
+
+
+    /* 
+     * Aktivoidaan vertailuun valittu arvostelija kolleegat kokoavalta nimilistalta
+     */
+    let newColleaguesList = state.colleaguesList.map(c => {
+        let id = c.id;
+
+        /*
+         * Mikäli vertiluarvosanat luettiin juuri palvelimelta päivitetään "saatavuus"
+         */
+        let availeable = id===newCompId?true:c.availeable
+
+        return {
+            ...c,
+            active: id===newCompId?true:false,
+            availeable: availeable            
+        }
+    });
+
+
+    let newCurrentPage = 1;
+
+    let visibleData = getPresentedReviewsList(
+        state.data, 
+        state.searchStr, 
+        state.sortingField, 
+        state.sortingOrder, 
+        getActiveCompData(newCompId, newCompset),
+        state.selectedMovies
+    );
+
+    /* Jaotetellaan elokuvat sen perustella, kumpi antoi enemmän tähtiä (aktiivinen kriitikko vai vertailussa oleva) */
+    let newShares = getShares(visibleData);
+    newShares = wrapShares(newShares, false);
+
+    /*
+     * Sivutukseen tarvittava tieto
+     */
+    let itemsTotal = visibleData.length;
+    let pagesTotal = getNumberOfPagesTotal(state, itemsTotal);
+
+   /*
+     * Suodatetaan sivulla näytettävät elokuvat, kun sivutus otetaan huomioon
+     */
+   visibleData = getVisibleItems(visibleData, newCurrentPage, state.itemsPerPage);
+
+   let paginationLinks = getPaginationLinks(newCurrentPage, state.maxNumberOfPaginationLinks, pagesTotal);
+
+   /* Päivitetään arvosanataulukon otsikot */
+   let newHeaders = updateHeaders(newColleaguesList, getHeaders())
+
+   return {
+        ...state,
+        activeCompId: newCompId,
+        colleaguesList: newColleaguesList,
+        compset: newCompset,
+        currentPage: newCurrentPage,
+        headers: newHeaders,
+        loading: false,
+        paginationLinks: paginationLinks,
+        shares: newShares,
+        visibleData: visibleData
+    }
+}
+
+
+/*
+ * Kriitikolla on enemmän arvosteluita, kuin mitä kerrallaan näytölle mahtuu
+ * - päivitetään sivulla näytettävä lista
+ */
+const updateCurretPage = (state, page) => {
+
+    let newCurrentPage = page;
+
+    let visibleData = getPresentedReviewsList(
+        state.data, 
+        state.searchStr, 
+        state.sortingField, 
+        state.sortingOrder, 
+        getActiveCompData(state.activeCompId, state.compset),
+        state.selectedMovies
+    );
+
+    /*
+     * Sivutukseen tarvittava tieto
+     */
+   let itemsTotal = visibleData.length;
+   let pagesTotal = getNumberOfPagesTotal(state, itemsTotal);
+
+
+   /*
+     * Suodatetaan sivulla näytettävät elokuvat, kun sivutus otetaan huomioon
+     */
+   visibleData = getVisibleItems(visibleData, newCurrentPage, state.itemsPerPage);
+
+   let paginationLinks = getPaginationLinks(newCurrentPage, state.maxNumberOfPaginationLinks, pagesTotal);
+
+   return {
+        ...state,
+        currentPage: newCurrentPage,
+        paginationLinks: paginationLinks,
+        visibleData: visibleData
+    }
+
 
 }
 
@@ -540,12 +766,54 @@ const updateHeaders = (colleaguesList, headers) => {
  * - haku voi kohdistua joko arvosteltujen elokuvien listaan ja 
  *   samoja elokuvia arvostelleiden kriitikkojen nimilistaan.
  */
-const updateSearchSetting = (state, data) => {
+const updateSearchSetting = (state, str, target) => {
 
-    if(data.target==='primary')
-        return setReviewsSearchSettings(state, data);
+    if(target==='primary')
+        return setReviewsSearchSettings(state, str);
 
-    return setColleaquesSearch(state, data);
+    return setColleaquesSearch(state, str);
+}
+
+
+const updateSelectedMoviesEmphasis = (state, data) => {
+
+    let newSelectedMovies = data;
+
+    let visibleData = getPresentedReviewsList(
+        state.data, 
+        state.searchStr, 
+        state.newField, 
+        state.newOrder,
+        getActiveCompData(state.activeCompId, state.compset),
+        newSelectedMovies
+    );
+
+    /*
+     * Sivutukseen tarvittava tieto
+     */
+    let itemsTotal = visibleData.length;
+    let pagesTotal = getNumberOfPagesTotal(state, itemsTotal);
+
+    
+    let newCurrentPage = 1;
+
+
+   /*
+     * Suodatetaan sivulla näytettävät elokuvat, kun sivutus otetaan huomioon
+     */
+   visibleData = getVisibleItems(visibleData, newCurrentPage, state.itemsPerPage);
+
+   let paginationLinks = getPaginationLinks(newCurrentPage, state.maxNumberOfPaginationLinks, pagesTotal);
+
+
+
+   return {
+        ...state,
+        currentPage: newCurrentPage,
+        paginationLinks: paginationLinks,
+        selectedMovies: newSelectedMovies,
+        visibleData: visibleData
+    }
 }
 
 /*
@@ -623,9 +891,34 @@ const singleReviewerSlice = createSlice({
 
             return displayReviewerData(state, data);
         },
+        emphasizeSelectedMovies(state, action) {
+
+            const { data } = action.payload;
+
+            return updateSelectedMoviesEmphasis(state, data);
+
+        },
+        setComparedReviewer(state, action){
+
+            const { data, compId, loading } = action.payload;
+
+            if(loading) {
+                return {
+                    ...state,
+                    loading: true
+                }
+            };
+
+            return updateComparedColleaque(state, data, compId);
+        },
+        setCurretPage(state, action) {
+            const { page } = action.payload;
+            return updateCurretPage(state, page);
+        },
         setSearchSettings(state, action) {
-            const { str } = action.payload;
-            return updateSearchSetting(state, str);
+            const { str, target } = action.payload;
+
+            return updateSearchSetting(state, str, target);
         },
         setSortingSettings(state, action) {
 
@@ -633,14 +926,38 @@ const singleReviewerSlice = createSlice({
             return updateSortingSettings(state, field);
 
         },
+        setColleaqueListSortingCriteria(state, action) {
+
+            const { criteria } = action.payload;
+            return setCollequeListSorting(state, criteria);
+
+        },
+
     }
 })
 
 export const {
+    emphasizeSelectedMovies,
     fetchingData,
+    setComparedReviewer,
+    setColleaqueListSortingCriteria,
+    setCurretPage,
     setSearchSettings,
     setSortingSettings
 } = singleReviewerSlice.actions;
+
+export const changeComparedColleaque = (compId) => {
+
+    return async dispatch => {
+
+        dispatch(setComparedReviewer({
+            loading: false,
+            compId: compId,
+            data: null
+        }));
+
+    }
+};
 
 export const initializeReviewer = (id) => {
 
@@ -652,18 +969,71 @@ export const initializeReviewer = (id) => {
         }))
 
         // const sbog = await movieService.getStarsBasedOnGenres(id);
+        const sRew = await movieService.getCriticDetails(id);
 
-        setTimeout(() => {
+        dispatch(fetchingData({
+            loading: false,
+            data: sRew.data
+        }))
 
-            dispatch(fetchingData({
-                loading: false,
-                data: SingleReviewerData
-            }))
-            
-        }, 1000);
+    }
+
+};
+
+/*
+ * loadColleagueData(id, colleague.id)
+ */
+export const loadColleagueData = (id, compId) => {
+
+    return async dispatch => {
+
+        dispatch(setComparedReviewer({
+            loading: true,
+            compId: compId,
+            data: null
+        }));
+
+        const sbog = await movieService.getCollequeReviews(id, compId);
+
+        dispatch(setComparedReviewer({
+            loading: false,
+            compId: compId,
+            data: sbog.data
+        }))
+    }
+};
+
+/* 
+ * Sivun toisessa reunassa on grafiikka, joka esittää kuinka monelle elokuvalle
+ * kriitikko antoi paremman arvosana kuin vertailuun valittu kriitikko jne.
+ * 
+ * Kun grafiikasta valitaan jokin kolmesta sektorista (parempi, sama, huonompi) 
+ * suodatatetaan näkyville vain ne elokuvat, joille on kriitikot antoivat valinnan
+ * mukaiset arvosanat.
+ */
+export const setEmphasizedMovies = (arr) => {
+
+    return dispatch => {
+
+        dispatch(emphasizeSelectedMovies({
+            data: arr
+        }));
     }
 
 }
+
+/*
+ * Kriitikkolistan lajittelujärjestyksen vaihto
+ */
+export const updateCompListSorting = (val) => {
+
+    return dispatch => {
+
+        dispatch(setColleaqueListSortingCriteria({criteria: val}))
+    }
+
+}
+
 
 
 export default singleReviewerSlice.reducer;

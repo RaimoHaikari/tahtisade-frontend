@@ -17,12 +17,15 @@ import {
     TD
 } from './tableElements';
 
+import { convertAverageToStars } from '../../../misc/helperFunctions';
+
 const GeneralTable = ({ store }) => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const {headers,search, sortingField, sortingOrder, visibleData} = useSelector(state => state[store]);
+
 
     const onSortingChange = (field)  => {
         dispatch(updateSortingSetting({
@@ -87,11 +90,13 @@ const GeneralTable = ({ store }) => {
                     {
                         visibleData.map((m, i) => {
 
+
                             return (
                                 <TR 
                                     className={m.productPage?'linkToDetails':null}
-onClick={() => rowCliked(m)}
-                                    key={i}>
+                                    onClick={() => rowCliked(m)}
+                                    key={i}
+                                >
                                     {
                                         headers.map((header, index) => {  
 
@@ -100,7 +105,9 @@ onClick={() => rowCliked(m)}
                                                     {
                                                         search !== '' && header.searchable
                                                         ? emphasizeSearched(m[header.field])
-                                                        : m[header.field]
+                                                        : header.field === 'starsAverage'
+                                                            ? convertAverageToStars(m[header.field])
+                                                            : m[header.field]
                                                     }
                                                 </TD>
                                             );

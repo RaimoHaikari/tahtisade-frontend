@@ -1,13 +1,31 @@
 import axios from "axios";
 
 import {
+    ALL_CRITICS,
     ALL_GENRES,
-    STARS_BASED_ON_GENRE,
     ALL_MOVIES,
-    MOVIE_DETAILS
+    COLLEQUE_REVIEWS,
+    MOVIE_DETAILS,
+    SINGLE_CRITIC,
+    STARS_BASED_ON_GENRE,
 } from "../queries";
 
 let backendUrl = 'https://infinite-depths-50039.herokuapp.com/';
+
+/*
+ * Haetaan kriitikot listaavalla yhteenvetosivulla esitettävät tiedot
+ */
+const getCriticsOverview = async () => {
+
+    const response = await axios.post(
+        backendUrl,
+        {
+            query: ALL_CRITICS
+        }
+    )
+
+    return response.data
+}
 
 /*
  * Haetaan genreluokkien yhteenvetosivulla esitettävät tiedot
@@ -55,6 +73,41 @@ const getGeneralListing = async () => {
     return response.data
 }
 
+/* Yksittäisen kriitikon tietojen perussetti */
+const getCriticDetails = async (id) => {
+
+    const response = await axios.post(
+        backendUrl,
+        {
+            query: SINGLE_CRITIC,
+            variables: {
+                criticId: id
+            }
+        }
+    )
+
+    return response.data
+
+};
+
+/* Vertailuun valitun kriitikon arvio aktiivisen kriitikon arvostelemista elokuvista */
+const getCollequeReviews = async (criticID, collequeID) => {
+
+    const response = await axios.post(
+        backendUrl,
+        {
+            query: COLLEQUE_REVIEWS,
+            variables: {
+                criticId: criticID,
+                collequeId: collequeID
+            }
+        }
+    )
+
+    return response.data
+
+}
+
 const getMovieDetails = async (id) => {
 
     const response = await axios.post(
@@ -72,8 +125,11 @@ const getMovieDetails = async (id) => {
 };
 
 export default {
+    getCriticsOverview,
     getGenresOverview,
     getGeneralListing,
     getMovieDetails,
-    getStarsBasedOnGenres
+    getStarsBasedOnGenres,
+    getCriticDetails,
+    getCollequeReviews
 };

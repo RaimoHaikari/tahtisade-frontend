@@ -8,6 +8,12 @@ import {
 import RadioGroup from "../../GeneralLayout/RadioGroup";
 import Search from "../../GeneralLayout/Search";
 
+import {
+    changeComparedColleaque,
+    loadColleagueData,
+    updateCompListSorting
+} from '../../../reducers/singleReviewerReducer';
+
 import {updateSearchSetting} from "../../../reducers/sharedReducer";
 
 const Colleagues = () => {
@@ -30,20 +36,16 @@ const Colleagues = () => {
     });
 
     const changeHandler = (val) => {
-        //dispatch(updateCompListSorting(val));
-        console.log("Jotain tarttis tehdä");
+        dispatch(updateCompListSorting(val));
     }
 
     const clickHandler = (colleague) => {
 
-        console.log("Myös nyt pitäisi tehdä jotain");
-
-        /*
         if(colleague.availeable)
-            dispatch(updateCompReviewer(colleague.id))
+            dispatch(changeComparedColleaque(colleague.id));
         else
-            dispatch(loadColleagueData(id, colleague.id))
-            */
+            dispatch(loadColleagueData(id, colleague.id));
+
     }
 
     return (

@@ -16,6 +16,10 @@ const LINKKI = styled.a`
     border-radius: 2px;
 `;
 
+/*
+ * 27.7.2022 
+ * - Toiminto siirretty misc/helperFunctions moduuliin
+ */
 const visualizeStars = (avg) => {
 
     let val = [];

@@ -12,6 +12,73 @@ export const STARS_BASED_ON_GENRE = `
   }
 `;
 
+/*
+ * Yksittäisen kriitikon arvostelujen tarkastelun lähtötiedot
+ */
+export const SINGLE_CRITIC = `
+  query Query($criticId: String!) {
+
+    criticDetails(criticID: $criticId) {
+      criticID
+      nimi
+
+    }
+    allReviews(criticID: $criticId) {
+      stars
+      googleID
+      link
+      publisher
+      movie {
+        nimi
+      }
+    }
+
+    criticDetails(criticID: $criticId) {
+      reviewerWithShardItems {
+        criticID
+        count
+        name
+      }
+    }
+
+    criticDetails(criticID: $criticId) {
+      defCompSet {
+        googleID
+        count
+        starsAverage
+      }
+    }
+  }
+`;
+
+/*
+ * Minkälaisia arvosteluja vertailuun valittu kriitikko on antanut
+ * aktiivisen kriitikon arvostelemille elokuville
+ */
+export const COLLEQUE_REVIEWS = `
+  query Query($criticId: String!, $collequeId: String!) {
+    collequeReviews(criticID: $criticId, collequeID: $collequeId) {
+      criticID
+      googleID
+      stars
+    }
+  }
+`;
+
+/*
+ * Kriitikot listaavalla sivulle esitettävät yhteenvetotiedot
+ */
+
+export const ALL_CRITICS = `
+  query {
+    allCritics {
+      nimi
+      criticID
+      starsAverage
+      numbOfReviews
+    }
+  }
+`;
 
 
 export const ALL_GENRES = `

@@ -3,16 +3,19 @@
  */
 import { createSlice } from '@reduxjs/toolkit';
 
-import { ReviewerListData } from "../misc/mockData";
 
 import {
-    convertAverageToStars,
     displayStars,
     getNumberOfPagesTotal,
     getPaginationLinks,
     getPresentedItemsList,
     getVisibleItems
 } from "../misc/helperFunctions";
+
+/*
+ * Yhteydet backEnd:iin
+ */
+import movieService from '../services/movies';
 
 import { max } from "d3-array";
 
@@ -50,8 +53,8 @@ const initialState = {
 
 const displayReviewerList = (state, reviewers) => {
 
-    let loadedReviewerList  = reviewers;
     let maxNumbOfReviews = -1;
+
 
     /*
      * Palvelimelta luetun datan esikäsittely
@@ -61,17 +64,23 @@ const displayReviewerList = (state, reviewers) => {
      * - ikoneilla esitetty muoto arvosanojen keskiarvosta
      * 
      * Selvitetään annettujen arvostelujen enimmäismäärä
+     * 
      */
-    loadedReviewerList = loadedReviewerList.map(r => {
+    let loadedReviewerList = reviewers.allCritics.map(c => {
 
-        let productPage = `/kriitikot/${r.id}`;
-        let visualizedStars = convertAverageToStars(r['starsAverage']);
+        let productPage = `/kriitikot/${c.criticID}`;
+        
+        //let visualizedStars = convertAverageToStars(c['starsAverage']);
+        let visualizedStars = c['starsAverage'];
 
-        if(parseInt(r.numbOfRevies) > maxNumbOfReviews)
-            maxNumbOfReviews = parseInt(r.numbOfRevies)
+        if(c.numbOfReviews > maxNumbOfReviews)
+            maxNumbOfReviews = c.numbOfReviews
 
         return {
-            ...r,
+            name: c.nimi,
+            id: c.criticID,
+            starsAverage: c.starsAverage,
+            numbOfRevies: c.numbOfReviews,
             productPage: productPage,   // Linkki kriitikon tiedot esittävälle sivulle
             visualizedStars: visualizedStars
         }
@@ -387,7 +396,7 @@ const reviewerlistSlice = createSlice({
         },
         fetchingData(state, action){
 
-            const { loading,reviewers} = action.payload;
+            const { loading, reviewers } = action.payload;
 
             if(loading){
                 return {
@@ -431,18 +440,19 @@ export const initializeReviewers = () => {
 
     return async dispatch => {
 
-        dispatch(fetchingData({loading: true,reviewers: null}));
+        dispatch(fetchingData({
+            loading: true,
+            reviewers: null
+        }));
 
-        setTimeout(() => {
+        const critics = await movieService.getCriticsOverview();
 
-            dispatch(
-                fetchingData({
-                    loading: false,
-                    reviewers: ReviewerListData
-                })
-            )
-            
-        }, 1000);
+        dispatch(
+            fetchingData({
+                loading: false,
+                reviewers: critics.data
+            })
+        )
 
     }
 

@@ -23,7 +23,12 @@ import {
 import {
     setSearchSettings as setSingleReviewerSearchSettings,
     setSortingSettings as setSingleReviewerSortingSettings,
+    setCurretPage as setSingleReviewerCurretPage
 } from './singleReviewerReducer';
+
+import {
+    setSortingSettings as setSingleMovieSortingSettings
+} from './singleMovieReducer';
 
 const initialState = {};
 
@@ -58,6 +63,11 @@ export const updateCurretPage = (val) => {
             case 'reviewerList':
                 dispatch(setReviewerlistCurretPage({ page: val.page }));
                 break;
+
+            case 'singleReviewer':
+                dispatch(setSingleReviewerCurretPage({ page: val.page }));
+                break;
+    
 
         }
     }
@@ -102,7 +112,12 @@ export const updateSearchSetting = (val) => {
                 break;
 
             case 'singleReviewer':
-                dispatch(setSingleReviewerSearchSettings({ str: val.str }));
+                dispatch(
+                    setSingleReviewerSearchSettings({ 
+                        str: val.str,
+                        target: val.target === undefined?'primary':val.target
+                    })
+                );
                 break;
 
         }
@@ -127,6 +142,9 @@ export const updateSortingSetting = (val) => {
                 break;
             case 'singleReviewer':
                 dispatch(setSingleReviewerSortingSettings({field: val.field}));
+                break;
+            case 'singleMovie':
+                dispatch(setSingleMovieSortingSettings({field: val.field}))
                 break;
 
         }

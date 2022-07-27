@@ -34,10 +34,10 @@ export const convertAverageToStars = (avg) => {
     let val = [];
 
     for(let i = 0; i < Math.floor(avg); i ++)
-        val.push(<BsFillStarFill />);
-
+        val.push(<BsFillStarFill key={`bfsf-${i}`}/>);
+    
     if(avg % 1 >= 0.5)
-        val.push(<BsStarHalf />);
+        val.push(<BsStarHalf key={`bfh-1`}/>);
 
     return val;
 }

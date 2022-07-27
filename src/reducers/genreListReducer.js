@@ -104,8 +104,6 @@ const displayGenreList = (state, genres) => {
    genresToShow = getVisibleItems(genresToShow, state.currentPage, state.itemsPerPage)
 
    let paginationLinks = getPaginationLinks(state.currentPage, state.maxNumberOfPaginationLinks, pagesTotal);
-
-   console.log(genresToShow);
     
     return {
         ...state,
