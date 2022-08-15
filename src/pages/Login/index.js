@@ -11,7 +11,10 @@ const Login = (props) => {
     const onSubmit = (event) => {
 
         event.preventDefault();
-        props.onLogin('rHaikari');
+        props.onLogin({
+            username: username,
+            password: password
+        });
         navigate('/')
 
     }

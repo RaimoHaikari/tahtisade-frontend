@@ -1,4 +1,5 @@
 import axios from "axios";
+import { print } from "graphql"
 
 import {
     ALL_CRITICS,
@@ -9,6 +10,8 @@ import {
     SINGLE_CRITIC,
     STARS_BASED_ON_GENRE,
 } from "../queries";
+
+import { LOGIN } from "../graphql/mutations";
 
 let backendUrl = 'https://infinite-depths-50039.herokuapp.com/';
 
@@ -41,6 +44,7 @@ const getGenresOverview = async () => {
 
     return response.data
 }
+
 
 const getStarsBasedOnGenres = async (genre) => {
 

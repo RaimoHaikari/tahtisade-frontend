@@ -9,7 +9,8 @@ import {
     NavItem,
     NavLinks,
     NavBtn,
-    NavBtnLink
+    NavBtnLink,
+    NavBtnText
 } from './navbarElements';
 
 import { IconContext } from 'react-icons';
@@ -48,12 +49,21 @@ const Navbar = ({ toggle,user }) => {
                             <NavItem>
                                 <NavLinks to="/genret">Genret</NavLinks>
                             </NavItem>
+                            {
+                                user && <NavItem><NavLinks to="/admin">Hallinta</NavLinks></NavItem>
+                            }
 
                         </NavMenu>
 
-                        <NavBtn>
-                            <NavBtnLink to="/kirjaudu">Kirjaudu</NavBtnLink>
-                        </NavBtn>
+                        {
+                            user 
+                            ? <NavBtn>
+                                <NavBtnText to="/kirjauduUlos">Kirjaudu ulos</NavBtnText>
+                              </NavBtn>
+                            : <NavBtn>
+                                <NavBtnLink to="/kirjaudu">Kirjaudu</NavBtnLink>
+                              </NavBtn>
+                        }
 
 
                     </NavbarContainer>
@@ -64,38 +74,5 @@ const Navbar = ({ toggle,user }) => {
     );
 
 };
-/*
-<CONTAINER>
-
-            <INPUT 
-                type="checkbox"
-                id="check"
-            />
-
-            <header>
-            
-                <h2><a href='#' className='logo'>Logo</a></h2>
-
-                <div className='navigation'>
-                    <LINK to="/">Etusivu</LINK>
-                    <LINK to="/elokuvat">Elokuvat</LINK>
-                    <LINK to="/kriitikot">Kriitikot</LINK>
-                    <LINK to="/genret">Genret</LINK>
-                    {
-                        user
-                        ? <em>{user} logged in</em>
-                        : <LINK to="/login">Kirjaudu</LINK>
-                    }            
-                </div>
-
-                <LABEL for="check" className='menuButtons'>
-                    <i className="btn-open">o</i>
-                    <i className="btn-close">x</i>
-                </LABEL>
-                
-            </header>    
-
-        </CONTAINER>
-*/
 
 export default Navbar;

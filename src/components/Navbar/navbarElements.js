@@ -124,5 +124,16 @@ export const NavBtnLink = styled(Link)`
         color: ${({theme}) => theme.navbar.navBtn.colorHover};
     }
 
+`;
 
+export const NavBtnText = styled(Link)`
+    color: ${({theme}) => theme.navbar.navText.color};
+
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    padding: 0 1rem;
+    height: 100%;
+
+    cursor: pointer;
 `;

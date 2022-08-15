@@ -19,6 +19,9 @@ const BasicTheme = {
             bgHover: '#01bf71',
             color: '#01bf71',
             colorHover: '#010606'
+        },
+        navText: {
+            color: 'white',
         }
     },
     hero: {
