@@ -12,6 +12,16 @@ export const STARS_BASED_ON_GENRE = `
   }
 `;
 
+export const STARS_BASED_ON_GENRE_LARAVEL = `
+  query Query($genre: String!) {
+    starsBasedOnGenre(genre: $genre) {
+      name
+      total
+      stars
+    }
+  }
+`;
+
 /*
  * Yksittäisen kriitikon arvostelujen tarkastelun lähtötiedot
  */
@@ -51,11 +61,64 @@ export const SINGLE_CRITIC = `
   }
 `;
 
+
+/*
+ * Yksittäisen kriitikon arvostelujen tarkastelun lähtötiedot
+ */
+export const SINGLE_CRITIC_LARAVEL = `
+  query Query($criticId: String!) {
+
+    critic(criticID: $criticId){
+      criticID
+      nimi
+      
+      reviewerWithSharedItems {
+        criticID
+        count
+        name
+      }
+      
+      defCompSet {
+        googleID
+        count
+        starsAverage
+      }
+  
+    }
+
+    allReviews(criticID: $criticId){
+      googleID
+      stars
+      link
+      publisher
+      movie {
+        nimi
+      }
+    }    
+
+  }
+`;
+
+
 /*
  * Minkälaisia arvosteluja vertailuun valittu kriitikko on antanut
  * aktiivisen kriitikon arvostelemille elokuville
  */
 export const COLLEQUE_REVIEWS = `
+  query Query($criticId: String!, $collequeId: String!) {
+    collequeReviews(criticID: $criticId, collequeID: $collequeId) {
+      criticID
+      googleID
+      stars
+    }
+  }
+`;
+
+/*
+ * Minkälaisia arvosteluja vertailuun valittu kriitikko on antanut
+ * aktiivisen kriitikon arvostelemille elokuville
+ */
+export const COLLEQUE_REVIEWS_LARAVEL = `
   query Query($criticId: String!, $collequeId: String!) {
     collequeReviews(criticID: $criticId, collequeID: $collequeId) {
       criticID
@@ -80,8 +143,34 @@ export const ALL_CRITICS = `
   }
 `;
 
+/*
+ * Kriitikot listaavalla sivulle esitettävät yhteenvetotiedot
+ */
+
+export const ALL_CRITICS_LARAVEL = `
+  {
+    critics {
+      nimi
+      criticID
+      starsAverage
+      numbOfReviews  
+    }
+  }
+`;
+
 
 export const ALL_GENRES = `
+  query {
+    allGenres {
+      genre
+      numberOfMovies
+      numberOfReviews
+      starsAverage
+    }
+  }
+`;
+
+export const ALL_GENRES_LARAVEL = `
   query {
     allGenres {
       genre
@@ -109,6 +198,28 @@ export const ALL_MOVIES = `
       }
     }
     allGenres {
+      genre
+    }
+  }
+`;
+
+export const ALL_MOVIES_LARAVEL = `
+  {
+    movies {
+      googleID
+      nimi
+      wiki
+      kavi
+      img
+      ensiIlta
+      reviews {
+        stars
+      }
+      genres {
+        genre
+      }
+    }
+    distinctGenres {
       genre
     }
   }
@@ -154,4 +265,47 @@ export const MOVIE_DETAILS = `
       },
     }
   }
+`;
+
+
+/*
+ *
+ */
+export const MOVIE_DETAILS_LARAVEL = `
+query movie($googleId: Int!) {
+  movie(googleID: $googleId) {
+    googleID
+    nimi
+    wiki
+    kavi
+    img
+    ensiIlta
+    genres {
+      genre
+    }
+    reviews {
+      criticID
+      stars
+      link
+      publisher
+      name
+    }
+    director {
+      kaviID
+      nimi
+    }
+    distributor {
+      kaviID
+      nimi
+    }
+    actors {
+      kaviID
+      nimi
+    }
+    writer {
+      kaviID
+      nimi
+    }
+  }
+}
 `;

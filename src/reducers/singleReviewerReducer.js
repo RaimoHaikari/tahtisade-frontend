@@ -11,7 +11,7 @@ import {
 /*
  * Yhteydet backEnd:iin
  */
-import movieService from '../services/movies';
+import movieService from '../services/moviesLaravel';
 
 import {
     SingleReviewerData,
@@ -75,9 +75,9 @@ const initialState = {
  */
 const displayReviewerData = (state, data ) => {
 
-    const criticID = data.criticDetails.criticID;
-    const criticName = data.criticDetails.nimi;
-    const defCompSet = data.criticDetails.defCompSet.map(c => {
+    const criticID = data.critic.criticID;
+    const criticName = data.critic.nimi;
+    const defCompSet = data.critic.defCompSet.map(c => {
         return {
             googleID: c.googleID,
             count: c.count,
@@ -120,7 +120,7 @@ const displayReviewerData = (state, data ) => {
 
     let newCompset = setupCompset(defCompSet);
 
-    let originalColleaquesList = data.criticDetails.reviewerWithShardItems.map(c => {
+    let originalColleaquesList = data.critic.reviewerWithSharedItems.map(c => {
         return {
             id: c.criticID,
             count: c.count,
@@ -985,6 +985,7 @@ export const initializeReviewer = (id) => {
 
         // const sbog = await movieService.getStarsBasedOnGenres(id);
         const sRew = await movieService.getCriticDetails(id);
+        console.log(sRew);
 
         dispatch(fetchingData({
             loading: false,

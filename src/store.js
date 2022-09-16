@@ -8,6 +8,7 @@ import singleGenreReducer from './reducers/singleGenreReducer';
 import reviewerListReducer from './reducers/reviewerListReducer';
 import singleReviewerReducer from './reducers/singleReviewerReducer';
 import userReducer from './reducers/userReducer';
+import updateReducer from './reducers/updateReducer';
 
 const store = configureStore({
     reducer: {
@@ -18,7 +19,8 @@ const store = configureStore({
         reviewerList: reviewerListReducer,
         singleReviewer: singleReviewerReducer,
         user: userReducer,
-        shared: sharedReducer
+        shared: sharedReducer,
+        update: updateReducer
     }
 });
 

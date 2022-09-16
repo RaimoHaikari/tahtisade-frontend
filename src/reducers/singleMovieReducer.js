@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 /*
  * Yhteydet backEnd:iin
  */
-import movieService from '../services/movies';
+import movieService from '../services/moviesLaravel';
 
 
 import ComponentService from '../components/SingleMovie/ReviewsTable';
@@ -173,10 +173,11 @@ export const initializeMovie = (val) => {
 
         //const movie = await movieService.getGeneralListing();
         const movie = await movieService.getMovieDetails(movieId);
+        console.log(movie);
 
         dispatch(fetchingMovie({
             loading: false,
-            data: movie.data.movieDetails
+            data: movie.data.movie
         }));
 
     }

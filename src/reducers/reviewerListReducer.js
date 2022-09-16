@@ -15,9 +15,7 @@ import {
 /*
  * Yhteydet backEnd:iin
  */
-import movieService from '../services/movies';
-
-import { max } from "d3-array";
+import movieService from '../services/moviesLaravel';
 
 const DISPLAYTYPE = [
     {
@@ -66,7 +64,7 @@ const displayReviewerList = (state, reviewers) => {
      * Selvitetään annettujen arvostelujen enimmäismäärä
      * 
      */
-    let loadedReviewerList = reviewers.allCritics.map(c => {
+    let loadedReviewerList = reviewers.critics.map(c => {
 
         let productPage = `/kriitikot/${c.criticID}`;
         
@@ -446,6 +444,7 @@ export const initializeReviewers = () => {
         }));
 
         const critics = await movieService.getCriticsOverview();
+        console.log(critics);
 
         dispatch(
             fetchingData({

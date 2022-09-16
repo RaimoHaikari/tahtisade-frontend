@@ -6,7 +6,7 @@ import { createSlice } from '@reduxjs/toolkit';
 /*
  * Yhteydet backEnd:iin.
  */
-import movieService from '../services/movies';
+import movieService from '../services/moviesLaravel';
 
 import { average, posterUrl , round } from '../misc/helperFunctions';
 
@@ -731,7 +731,8 @@ export const initializeMovies = () => {
 
         dispatch(fetchingMovies({
             loading: true,
-            data: null
+            movies: null,
+            genres: null
         }));
 
         const movies =  await movieService.getGeneralListing();
@@ -739,8 +740,8 @@ export const initializeMovies = () => {
         dispatch(
             fetchingMovies({
                 loading: false,
-                movies: movies.data.allMovies,
-                genres: movies.data.allGenres
+                movies: movies.data.movies,
+                genres: movies.data.distinctGenres
             })
         );
     

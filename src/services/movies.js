@@ -11,8 +11,6 @@ import {
     STARS_BASED_ON_GENRE,
 } from "../queries";
 
-import { LOGIN } from "../graphql/mutations";
-
 let backendUrl = 'https://infinite-depths-50039.herokuapp.com/';
 
 /*

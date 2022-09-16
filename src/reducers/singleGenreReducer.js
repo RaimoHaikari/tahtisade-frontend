@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 /*
  * Yhteydet backEnd:iin
  */
-import movieService from '../services/movies';
+import movieService from '../services/moviesLaravel';
 
 import { round } from "../misc/helperFunctions";
 
@@ -43,6 +43,8 @@ const countNumberOfReviews = (data) => {
 
 const displayGenreData = (state, data, id) => {
 
+
+
     let newActiveId = id;                // - vertailuun valitun kriitikon id-tunnus
     let newData; 
 
@@ -62,18 +64,27 @@ const displayGenreData = (state, data, id) => {
         }
     });
 
+
     // - lasketaan arvostelujen määrät per genre
     newData = countNumberOfReviews(_newData);
 
+
+
     let activeGenreData = getGenre(newActiveId, newData);
+
 
     // - skaalataan annettujen tähtien määrät vastamaan aktiivisen genren tähtien määrää....
     newData = scaleStars(activeGenreData, newData);
+    console.log("1");
+
 
     let maxNumbOfStars = findMaxNumbOfRevs(newData);
+    console.log("2");
 
     // - haetaan vertailtava genre
     let compGenreData = getGenre(DEFAULT_COMP_GENRE, newData);
+    
+    console.log("3");
 
     return {
         ...state,
@@ -232,6 +243,7 @@ export const initializeGenre = (id) => {
         }))
 
         const sbog = await movieService.getStarsBasedOnGenres(id);
+        console.log(sbog);
 
         dispatch(
             fetchingData({

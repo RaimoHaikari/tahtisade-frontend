@@ -349,6 +349,8 @@ export const initializeGenres = () => {
 
         const genres =  await movieService.getGenresOverview();
 
+        console.log(genres);
+
         dispatch(
             fetchingGenres({loading: false,genres: genres.data.allGenres})
         )

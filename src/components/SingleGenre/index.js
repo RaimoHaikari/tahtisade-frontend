@@ -10,7 +10,6 @@ import {
     TBODY,
     TR,
     TD,
-    SPAN
 } from "../SingleMovie/moviecardElements";
 
 const SingleGenre = () => {
@@ -20,8 +19,8 @@ const SingleGenre = () => {
         let d = state.singleGenre.activeGenre.data;
         let comp = state.singleGenre.compCenre;
 
-//console.log(".............................");
-//console.log(comp);
+console.log(".............................");
+console.log(comp);
 
         return {
             ...d,
