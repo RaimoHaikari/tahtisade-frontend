@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 /*
  * Yhteydet backEnd:iin.
  */
-import movieService from '../services/movies';
+import movieService from '../services/moviesLaravel';
 
 import { getNumberOfPagesTotal, getVisibleItems, getPaginationLinks, round } from "../misc/helperFunctions";
 
@@ -352,7 +352,7 @@ export const initializeGenres = () => {
         console.log(genres);
 
         dispatch(
-            fetchingGenres({loading: false,genres: genres.data.allGenres})
+            fetchingGenres({loading: false,genres: genres.data.distinctGenres})
         )
         
         /*

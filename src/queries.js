@@ -172,7 +172,7 @@ export const ALL_GENRES = `
 
 export const ALL_GENRES_LARAVEL = `
   query {
-    allGenres {
+    distinctGenres {
       genre
       numberOfMovies
       numberOfReviews

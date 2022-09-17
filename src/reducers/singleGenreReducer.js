@@ -75,16 +75,11 @@ const displayGenreData = (state, data, id) => {
 
     // - skaalataan annettujen tähtien määrät vastamaan aktiivisen genren tähtien määrää....
     newData = scaleStars(activeGenreData, newData);
-    console.log("1");
-
 
     let maxNumbOfStars = findMaxNumbOfRevs(newData);
-    console.log("2");
 
     // - haetaan vertailtava genre
     let compGenreData = getGenre(DEFAULT_COMP_GENRE, newData);
-    
-    console.log("3");
 
     return {
         ...state,
