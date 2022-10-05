@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import {
     Aside,
@@ -20,6 +20,7 @@ const Critics = () => {
 
     const dispatch = useDispatch();
 
+    const { search } = useSelector(state => state.reviewerList);
 
     return (
         <Container>
@@ -35,6 +36,7 @@ const Critics = () => {
                             str: val
                         })
                     )}
+                    seachStr={search}
                 />
             </PaginationAndSearch>
 

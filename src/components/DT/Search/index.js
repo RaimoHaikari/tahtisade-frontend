@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Search = ({ onSearch }) => {
+const Search = ({ onSearch, seachStr = '' }) => {
 
     const [search, setSearch] = useState("");
 
@@ -15,7 +15,7 @@ const Search = ({ onSearch }) => {
             className="form-control"
             style={{ width: "240px" }}
             placeholder="Search"
-            value={search}
+            value={seachStr}
             onChange={e => onInputChange(e.target.value)}
         />
     );

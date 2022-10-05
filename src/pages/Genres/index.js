@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import {
     Aside,
@@ -22,6 +22,9 @@ const Genres = () => {
 
     const dispatch = useDispatch();
 
+
+    const { search } = useSelector(state => state.genreList);
+
     return (
         <Container>
 
@@ -36,6 +39,7 @@ const Genres = () => {
                             str: val
                         })
                     )}
+                    seachStr={search}
                 />
             </PaginationAndSearch>
 

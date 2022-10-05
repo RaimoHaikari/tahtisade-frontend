@@ -10,9 +10,7 @@ import {
     STARS_BASED_ON_GENRE_LARAVEL
 } from "../queries";
 
-//let backendUrl = 'http://localhost:8000/graphql';
-let backendUrl = 'http://github-actions.tahtisadetta.fi/public/graphql';
-
+let backendUrl = 'http://tietokana.tahtisadetta.fi/graphql';
 
 /* Vertailuun valitun kriitikon arvio aktiivisen kriitikon arvostelemista elokuvista */
 const getCollequeReviews = async (criticID, collequeID) => {

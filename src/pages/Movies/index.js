@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import MovieList from '../../components/MovieList';
 import Genres from '../../components/MovieList/Genres';
@@ -21,18 +21,23 @@ const Movies = () => {
 
     const dispatch = useDispatch();
 
+    const { search } = useSelector(state => state.movieList);
+
     return (
         <Container>
 
             <PaginationAndSearch>
                 <Pagination store="movieList" />
                 <Search
+
                     onSearch={(val) => dispatch(
                         updateSearchSetting({
                             store: 'movieList',
                             str: val
                         })
                     )}
+
+                    seachStr={search}
                 />
             </PaginationAndSearch>
 
